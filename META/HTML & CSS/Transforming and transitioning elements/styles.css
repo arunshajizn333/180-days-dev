@@ -31,7 +31,13 @@ p{
 }
 
 p:hover {
-	transform : rotateX(360deg);
-	transition: transform 0.5s;
+    transform: rotateY(360deg);
+    transition: transform 1s;
+}
+
+p:nth-child(even):hover {
+    transform: rotateX(360deg);
+    transition: transform 1s;
+
 }
 
