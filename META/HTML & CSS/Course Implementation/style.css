@@ -1,0 +1,162 @@
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  display: grid;
+  grid-template-areas: "header" "nav" "main" "footer";
+  max-width: 80%;
+  min-height: 100vh;
+  grid-template-columns: 100%;
+  grid-template-rows: auto auto 1fr auto;
+}
+
+/* header area */
+
+header {
+  grid-area: header;
+  text-align: center;
+  margin: 5px;
+}
+
+header > img {
+  height: 100px;
+  width: auto;
+}
+
+/* navbar area */
+
+nav {
+  grid-area: nav;
+  display: flex;
+  justify-content: center;
+  margin: 5px;
+}
+
+.nav-div {
+ width: 100%;
+  border-radius: 10px;
+  background-color: rgb(59, 55, 55);
+}
+
+.nav-div > ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  list-style-type: none;
+}
+
+.nav-tems {
+  margin-right: 35px;
+  padding: 0;
+  font-size: 25px;
+  color: white;
+}
+
+/* main content area */
+
+main {
+  grid-area: main;
+  margin-top: 15px;
+ width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+
+}
+
+.section-1 {
+width: 100%;
+  height: 40%;
+  background-color: antiquewhite;
+  background-image: url("assets/ChatGPT Image Jul 27, 2026, 06_34_51 PM.png");
+  background-size: cover;
+  background-position: center;
+  border-radius: 15px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.section-1 > h2 {
+  color: white;
+  margin-left: 30px;
+}
+
+.section-1 > p {
+  margin-left: 30px;
+  margin-right: 20px;
+
+  color: white;
+}
+
+.section-2 {
+   width: 100%;
+    height: 60%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+    
+}
+
+.cards {
+    width:30%;
+    height: 100%;
+    background-color: blanchedalmond;
+    border-radius: 15px;
+  
+   display: flex;
+   flex-direction: column;
+  justify-content: center;
+    align-items: center;
+}
+.content{
+    width: 80%;
+    height: auto;
+
+}
+
+.content > img {
+    width: 100%;
+    height: 50%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.content>p{
+  
+      padding: 10px;
+}
+
+
+
+footer {
+  grid-area: footer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  
+  
+}
+
+.footerdiv{
+   width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+}
+
+.footer-logo>img{
+    height: 50px;
+    width: auto;
+}
