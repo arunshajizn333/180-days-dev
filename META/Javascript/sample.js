@@ -65,3 +65,42 @@ function clothesArray(){
 }
 // clothesArray();
 
+// var d=Math.random()*10;
+// console.log(Math.ceil(d));
+
+//example of adding properties and methods to an object
+// var car = {};
+// car.mileage = 98765;
+// car.color = "red";
+// console.log(car);
+// car.turnTheKey = function() {
+//     console.log("The engine is running")
+// }
+// car.lightsOn = function() {
+//     console.log("The lights are on.")
+// }
+// console.log(car);
+// car.turnTheKey();
+// car.lightsOn()
+
+
+employees=[
+   
+]
+
+function findoldestEmployee(employees){
+    if(employees.length === 0){
+        console.log("No employees found.");
+        return null;
+    }
+    let oldestEmployee=employees[0];
+
+    for(let i=1; i<employees.length; i++){
+        if(employees[i].age > oldestEmployee.age){
+            oldestEmployee = employees[i];
+        }
+    }
+    return oldestEmployee;
+}
+// var oldestEmployee = findoldestEmployee(employees);
+// console.log(oldestEmployee);
