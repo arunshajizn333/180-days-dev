@@ -104,3 +104,51 @@ function findoldestEmployee(employees){
 }
 // var oldestEmployee = findoldestEmployee(employees);
 // console.log(oldestEmployee);
+function addTwoSums(a,b){
+    try{
+        if(typeof a !== 'number' || typeof b !== 'number'){
+            throw new Error("Both arguments must be numbers");
+        }
+
+    }catch(error){
+        console.error(error.message);
+        return;
+    }
+    return console.log(a+b);
+
+}
+// addTwoSums(5,"5")
+
+// DEFENSIVE PROGRAMMING
+
+function letterFinder(word, match) {
+  // 1. Defensive checks
+  var condition1 = typeof(word) == 'string' && word.length >= 2;
+  var condition2 = typeof(match) == 'string' && match.length == 1;
+
+  // 2. Only proceed if conditions pass
+  if (condition1 && condition2) {
+    for (var i = 0; i < word.length; i++) {
+      if (word[i] == match) {
+        console.log('Found the', match, 'at', i);
+      } else {
+        console.log('---No match found at', i);
+      }
+    }
+  } else {
+    // 3. Graceful fallback
+    console.log("Please pass correct arguments to the function.");
+  }
+}
+
+// // Failing test:
+// letterFinder(1, 2); 
+// // Output: Please pass correct arguments to the function.
+
+// // Passing test:
+// letterFinder("cat", "c"); 
+// // Output: Found the c at 0 ...
+
+//   var result = null;
+//   console.log(result);
+
