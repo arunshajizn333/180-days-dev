@@ -119,7 +119,7 @@ function addTwoSums(a,b){
 }
 // addTwoSums(5,"5")
 
-// DEFENSIVE PROGRAMMING
+// g
 
 function letterFinder(word, match) {
   // 1. Defensive checks
