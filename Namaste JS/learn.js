@@ -28,3 +28,28 @@ function outer(){
   
 }
 outer()();
+
+function counter(i){  
+  var count=0;
+  function increment(){
+    count++;
+    console.log(count);
+  }
+  return increment;
+}
+const counter1 = counter();
+counter1();
+counter1();
+counter1();
+
+function arraySum(arr){
+  var sum=0;
+  function inner(){
+    for(let i=0;i<arr.length;i++){
+      sum+=arr[i];
+    }
+    console.log(sum);
+  }
+  return inner; 
+
+}
