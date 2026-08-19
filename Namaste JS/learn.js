@@ -53,3 +53,23 @@ function arraySum(arr){
   return inner; 
 
 }
+const sum1 = arraySum([1, 2, 3, 4, 5]);
+sum1();
+
+// Constructor Function & Data Hiding / Encapsulation using Closures
+function CounterConstructor() {
+  var count = 0;
+  this.incrementCount = function () {
+    count++;
+    console.log(count);
+  };
+  this.decrementCount = function () {
+    count--;
+    console.log(count);
+  };
+}
+
+const counter2 = new CounterConstructor();
+counter2.incrementCount();
+counter2.incrementCount();
+counter2.decrementCount();
