@@ -1,6 +1,6 @@
 # 180 Days Dev 🚀
 
-**Starting:** June 2, 2026
+**Starting:** Aug 2, 2026
 
 This repository documents my 180-day journey of becoming a better developer through consistent learning, coding, revision, and project building.
 
