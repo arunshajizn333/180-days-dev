@@ -57,16 +57,4 @@ I am documenting this journey publicly to stay accountable, track my growth, and
 | Pinne parakkuka. 🚀                                                                     Then fly. 🚀 |
 
 
-## Progress
 
-| Day | Date         | Status |
-| --- | ------------ | ------ |
-| 1   | June 2, 2026 | ✅      |
-| 2   | June 3, 2026 | ⬜      |
-| 3   | June 4, 2026 | ⬜      |
-
----
-
-### One Commit at a Time.
-
-**Day 1 → Day 180**
