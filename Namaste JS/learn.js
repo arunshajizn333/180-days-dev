@@ -87,3 +87,19 @@ function findLargest(arr) {
 }
 
 console.log(findLargest([3, 7, 2, 9, 5])); // Output: 9
+
+function multiply() {
+  var arr = [];
+  for (let i = 1; i < 5; i++) {
+    arr[i] = function () {
+      console.log(i * i);
+    };
+  }
+  return arr;
+}
+
+const multiply1 = multiply();
+multiply1[1]();
+multiply1[2]();
+multiply1[3]();
+multiply1[4]();
