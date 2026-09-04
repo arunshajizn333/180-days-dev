@@ -1,0 +1,61 @@
+Q5. What does an async function return?
+
+async function test() {
+    return "Hello";
+}
+
+console.log(test());
+
+What is the type of the returned value?
+its prints Hello bcz an async fn always return a promise,
+
+Then modify the code so "Hello" is printed using await.
+
+async function test() {
+    return "Hello"
+}
+
+async function main() {
+    let data= await test()
+    console.log(data);
+}
+
+main()
+
+Q6. Predict the output
+
+async function test() {
+    console.log("A");
+
+    await Promise.resolve();
+
+    console.log("B");
+}
+
+console.log("C");
+
+test();
+
+console.log("D");
+
+Don't just give the output. Explain why B comes where it does.
+
+it will be like first c then it moves to aysnc fn asit is called and prints A then an await is regiesterd then if await is nor resolved right away it moves towards to print d then only after  await Promise.resolve();
+is reolved it prints c
+
+
+
+
+Q7. Sequential execution
+
+Write an async function that does:
+
+Wait 2 seconds → print "First"
+Wait 1 second → print "Second"
+Wait 1 second → print "Third"
+
+Expected:
+
+First   → 2s
+Second  → 3s
+Third   → 4s

@@ -1,0 +1,79 @@
+Q1. Predict the output and explain the order.
+
+console.log("A");
+
+const p = new Promise((resolve) => {
+    console.log("B");
+
+    resolve("C");
+});
+
+console.log("D");
+
+p.then((value) => {
+    console.log(value);
+});
+
+console.log("E");
+
+Output:
+1.A
+2.D
+3.B
+4.C
+5.E
+
+Why: after A it prints d becuase promise createted but not called or used till that time ,after d p.then is called and b is printed also value in reslve C is also printed then js moves to print E
+
+Q2. Create your own Promise
+
+Create a Promise that:
+
+waits 2 seconds
+resolves with "Data received"
+prints the result using .then()
+
+Don't use async/await.
+
+const p= new Promise ((res,rej)=>{
+    setTimeout(function(){
+        res("Data Recieved")
+    },2000)
+
+})
+
+p.then(value=>console.log(value))
+
+Q3. Promise rejection
+
+Create a Promise that:
+
+waits 1 second
+rejects with "Something went wrong"
+handles the error using .catch()
+
+const Q3= new Promise ((res,rej)=>{
+    setTimeout(function(){
+        rej("Something went wrong")
+    },1000)
+
+})
+
+Q3
+.then(value=>console.log(value))
+.catch(err=>console.log(err))
+
+Q4. Promise states
+
+What will this print?
+
+const p = new Promise((resolve, reject) => {
+    resolve("Success");
+    reject("Error");
+});
+
+p.then(console.log).catch(console.log);
+
+Why doesn't "Error" get printed?
+
+ans:it printed succes bcz a primise will anyways will be settled and her as there are no error in promise it is fulfilled also by using .then and log in it ,.then always expects a callback fn and console.log is already a fn
