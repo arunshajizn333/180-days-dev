@@ -47,3 +47,4 @@ Don't just say "array".
 Write the approximate object structure.
 
 it will print similar to what we got in Q15 as an array-object with status:fulfilled/rejected and value 
+

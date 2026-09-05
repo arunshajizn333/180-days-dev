@@ -1,0 +1,136 @@
+Level 6
+
+Q17. Promise.race()
+
+const p1 = new Promise(resolve =>
+    setTimeout(() => resolve("Success"), 3000)
+);
+
+const p2 = new Promise((resolve, reject) =>
+    setTimeout(() => reject("Failed"), 1000)
+);
+
+Promise.race([p1, p2])
+    .then(console.log)
+    .catch(console.log);
+
+What happens?
+
+Most importantly: Why does race() reject even though another Promise eventually succeeds?
+
+Ans: here the ouput will be reject("failed) because just like the word race promise.race() will only prints the first one who finish first whether is fulfilled or rejected it dont care
+18. Change race to any
+
+Take Q17 and change only the Promise API.
+
+What happens now?
+
+Explain the difference.
+
+Promise.any([p1, p2])
+    .then(console.log)
+    .catch(console.log);
+
+
+while using promise.any() it prints whichever  resolves first, it dont care about reject unless all the promises get rejected
+
+
+Q19. All promises fail
+
+Promise.any([
+    Promise.reject("A"),
+    Promise.reject("B"),
+    Promise.reject("C")
+])
+.catch(err => {
+    console.log(err);
+});
+
+What type of error is produced?
+ans: it produces an aggregate error
+
+How would you access all three errors?
+
+inside .catch we should a foreach of err.errors.foreach
+
+Level 7 — this
+Basic tracing
+
+Q20.
+
+"use strict";
+
+function test() {
+    console.log(this);
+}
+
+test();
+
+What is this?
+this inside a strict mode cannot obtain the golobaal window/this so it will be undefined
+
+Why?
+
+In js when a normal function is called without window as prefix eg:(window.test) like test()its execution context set "this" to undefined,
+stict mode disables the substition:
+    if strict mode is disabled,js automaticlaly set it value fro undefined to global object{window}
+    
+
+Q21.
+
+"use strict";
+
+const obj = {
+    name: "Arun",
+
+    test: function () {
+        console.log(this.name);
+    }
+};
+
+obj.test();
+
+What is printed?
+Arun
+Why?    
+here test is called with a prefix of obj so here this will be set to obj 
+
+
+Q22. The call-site trap
+
+"use strict";
+
+const obj = {
+    name: "Arun",
+
+    test: function () {
+        console.log(this.name);
+    }
+};
+
+const fn = obj.test;
+
+fn();
+
+What happens?
+here it will throw an error because fn()IS AN OBJECT WITH Method in it not a function
+
+Level 8 — Arrow Functions + this
+
+Q23.
+
+const obj = {
+    name: "Arun",
+
+    test: function () {
+        const arrow = () => {
+            console.log(this.name);
+        };
+
+        arrow();
+    }
+};
+
+obj.test();
+
+What prints?
