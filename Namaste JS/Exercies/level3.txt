@@ -1,0 +1,99 @@
+Q9. Basic fetch
+
+Using this API:
+
+https://jsonplaceholder.typicode.com/users/1
+
+Write an async function that:
+
+calls fetch()
+waits for the response
+converts the response to JSON
+prints the JSON
+
+No .then().
+
+const data=  fetch("https://jsonplaceholder.typicode.com/users/1")
+
+async function connectUser() {
+    const userData=await data
+    const user1= await userData.json()
+    console.log(user1);
+    
+    
+}
+connectUser()
+
+
+Q10. Extract data
+
+Using the same API, print only:
+
+Name:
+Email:
+City:
+
+Don't print the entire object.
+
+const data=  fetch("https://jsonplaceholder.typicode.com/users/1")
+
+async function connectUser() {
+    const userData=await data
+    const user1= await userData.json()
+    return user1
+    
+}
+
+
+async function UserDetails() {
+    
+    const userDetail= await connectUser()
+    const {name,email}=userDetail
+    const {city}=userDetail.address
+
+    console.log(name,email,city);
+}
+
+UserDetails()
+
+
+Q11. Error handling
+
+Modify Q9 so that:
+
+successful request → print data
+failed request → print "Failed to fetch data"
+
+Use try...catch.
+
+async function connectUser() {
+
+    try {
+        const userData = await data
+        const user1 = await userData.json() 
+        return user1
+
+    }
+    catch (error) {
+        console.error("Failed to fetch data");
+    }
+
+
+}
+
+
+Q12. Understand the two awaits
+
+Explain this line by line:
+
+const response = await fetch(url);
+const data = await response.json();
+
+Your answer must contain:
+
+fetch() returns: a promise
+response contains: response object
+response.json() returns: contains parsed json
+data contains:json object
+
+
