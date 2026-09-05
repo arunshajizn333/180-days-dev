@@ -134,3 +134,70 @@ const obj = {
 obj.test();
 
 What prints?
+prints arun becuse here also obj.test set "this"  to obj
+
+Q24. The trap
+
+const obj = {
+    name: "Arun",
+
+    test: () => {
+        console.log(this.name);
+    }
+};
+
+obj.test();
+
+Will it print "Arun"?no
+
+Explain why or why not.
+becuse arrow functions doesnt have thier own this binding
+
+
+Level 9 — call()
+
+Q25.
+
+const person1 = {
+    name: "Arun"
+};
+
+const person2 = {
+    name: "Rahul"
+};
+
+function printName() {
+    console.log(this.name);
+}
+
+Use .call() so that:
+
+printName → Arun
+printName → Rahul
+
+without changing the function.
+
+printName.call(person1)
+printName.call(person2)
+
+
+Q26. Arguments with call()
+
+Create:
+
+function introduce(age, city) {
+    console.log(/* name, age, city */);
+}
+
+Then use .call() to produce:
+
+Arun is 24 years old and lives in Thrissur
+
+const user={name :"arun"}
+
+function introduce(age, city) {
+    console.log(`${this.name} is ${age} years old and he lives in ${city}`);    
+}
+
+introduce.call(user,24,"Thrissur");
+
