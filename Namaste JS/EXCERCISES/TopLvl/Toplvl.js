@@ -39,3 +39,50 @@ function task(name, time) {
         }, time);
     });
 }
+
+async function sequential() {
+    console.time("Sequential Time");
+   await task("A",2000)
+    await task("B",1000)
+    await task("C",1000)
+    console.timeEnd("Sequential Time");
+    
+}
+// sequential()
+
+
+
+async function parallel() {
+    console.time("Parallel Time");
+
+    const P1= task("A",2000);
+    const P2= task("B",1000)
+    const P3= task("C",1000)
+
+    await Promise.all([P1,P2,P3])
+    
+    
+
+    console.timeEnd("Parallel Time");
+}
+
+// parallel()
+
+const a = Promise.reject("A");
+
+const b = new Promise(resolve =>
+    setTimeout(() => resolve("B"), 2000)
+);
+
+const c = new Promise(resolve =>
+    setTimeout(() => resolve("C"), 1000)
+);
+
+Promise.race([a, b, c])
+    .then(console.log)
+    .catch(console.log);
+
+Promise.any([a, b, c])
+    .then(console.log)
+    .catch(console.log);
+

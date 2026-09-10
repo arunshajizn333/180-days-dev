@@ -51,3 +51,112 @@ E
 first F then test() is called so A then js sees await so exited the fn then prints G after first prmise inside test() is resolved it prints C then again js sees 
 an await so again exit the fn when that await is fulfilled it prints E,as resolved promise only gives output B & C and its output not consolelogged ,their value wont be shown in console
 
+
+Q38 — Parallel vs sequential
+
+
+function task(name, time) {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            console.log(name);
+            resolve();
+        }, time);
+    });
+}
+
+async function sequential() {
+    console.time("Sequential Time");
+   await task("A",2000)
+    await task("B",1000)
+    await task("C",1000)
+    console.timeEnd("Sequential Time");
+    
+}
+// sequential()
+
+
+
+async function parallel() {
+    console.time("Parallel Time");
+
+    const P1= task("A",2000);
+    const P2= task("B",1000)
+    const P3= task("C",1000)
+
+    await Promise.all([P1,P2,P3])
+    
+    
+
+    console.timeEnd("Parallel Time");
+}
+
+parallel()
+
+
+
+
+Q39 — race vs any
+
+Without running:
+
+const a = Promise.reject("A");
+
+const b = new Promise(resolve =>
+    setTimeout(() => resolve("B"), 2000)
+);
+
+const c = new Promise(resolve =>
+    setTimeout(() => resolve("C"), 1000)
+);
+
+What does each produce?
+
+Promise.race([a, b, c])
+
+it gives output of const a which A
+
+and:
+
+Promise.any([a, b, c])
+
+here the first resolved output which is const c that is C
+
+(.then(console.log)
+.catch(console.log); to be used to get output)
+
+
+Q40 — this + arrow + call
+
+This one is the real test:
+
+const obj1 = {
+    name: "Arun",
+
+    regular() {
+        const arrow = () => {
+            console.log(this.name);
+        };
+
+        arrow();
+    }
+};
+
+const obj2 = {
+    name: "Rahul"
+};
+
+obj1.regular.call(obj2);
+
+Predict the output. = Rahul
+
+Then explain:
+
+this inside regular() = ?
+
+this inside arrow()   = ?
+
+.call(obj2) explicitly forces this inside regular() to be obj2.
+
+Arrow functions don't have their own this. They take this from the function around them (regular()).
+
+Therefore, arrow() uses obj2, and console.log(this.name) prints "Rahul".
