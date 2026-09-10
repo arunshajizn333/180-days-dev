@@ -1,0 +1,53 @@
+Q36 — Promise + synchronous code
+console.log("1");
+
+const p = new Promise((resolve) => {
+    console.log("2");
+    resolve("3");
+});
+
+p.then(value => console.log(value));
+
+console.log("4");
+
+p.then(value => console.log(value + " again"));
+
+console.log("5");
+
+Predict the exact output.
+
+1
+2
+4
+5
+3
+3 again
+
+Q37 — Two awaits
+async function test() {
+    console.log("A");
+
+    await Promise.resolve("B");
+
+    console.log("C");
+
+    await Promise.resolve("D");
+
+    console.log("E");
+}
+
+console.log("F");
+
+test();
+
+console.log("G");
+
+Predict the exact output and explain where the function suspends twice.
+F   
+A
+G
+C
+E
+first F then test() is called so A then js sees await so exited the fn then prints G after first prmise inside test() is resolved it prints C then again js sees 
+an await so again exit the fn when that await is fulfilled it prints E,as resolved promise only gives output B & C and its output not consolelogged ,their value wont be shown in console
+

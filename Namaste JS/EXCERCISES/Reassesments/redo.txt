@@ -1,0 +1,242 @@
+Q1 — Promise Executor vs .then()
+
+Predict the exact output and order:
+
+console.log("A");
+
+const p = new Promise((resolve) => {
+    console.log("B");
+
+    resolve("C");
+});
+
+console.log("D");
+
+p.then((value) => {
+    console.log(value);
+});
+
+console.log("E");
+
+Write:
+
+Output:
+1.A
+2.B
+3.D
+4.E
+5.C
+
+Why?
+Here As js is single threaded synchronous language it executes A first then it moves to the next lines and reaches  promise -code then it will executing 
+B as it is inside console log but it wont exrcute or print c as it is inside a resolve and its not inside a console log ,then it prints D as code,then js moves and calls the promise
+and promise is doing to get c and printed but now it is in microtaskqueue so js go and prints E and then callstack is free it prints c
+
+Q6 — async/await + Microtask
+
+Predict the exact output:
+
+async function test() {
+    console.log("A");
+
+    await Promise.resolve();
+
+    console.log("B");
+}
+
+console.log("C");
+
+test();
+
+console.log("D");
+
+Write:
+
+Output:
+1.C
+2.A
+3.D
+4.B
+
+Why does B appear where it does? its beacuse after C IS PRINTED WHEN JS EXECUTED LINE BY LINE  ITS CALLS TEST() FN AND EXECUTES A then as await is callled
+js moves out then executes D then when await is fulfilled B  will be Printed
+
+
+
+
+// Q7. Sequential execution
+
+
+// TO Make sure the second timer doesn't start until the first operation finishes.
+
+ function timerSettter(time,output){
+    return new Promise((resolve,reject)=>{
+        setTimeout(function(){
+                resolve(output)
+        },time)
+       
+    })
+
+}
+
+async function timerContainer() {
+     console.log(await timerSettter(2000,"First"));
+     console.log(await timerSettter(3000,"Second"));
+     console.log(await timerSettter(4000,"Third"));
+    
+}
+timerContainer()
+
+
+Q8 — Parallel Execution
+
+const p1= new Promise ((res,rej)=>{
+    setTimeout(function(){
+        res("First")
+    },2000)
+
+})
+const p2= new Promise ((res,rej)=>{
+    setTimeout(function(){
+        res("Second")
+    },3000)
+
+})
+const p3= new Promise ((res,rej)=>{
+    setTimeout(function(){
+        res("Third")
+    },4000)
+
+})
+
+async function parallel() {
+    const data=await Promise.all([p1,p2,p3])
+    console.log(data);
+    
+}
+
+parallel()
+
+
+Q14 — Promise.all() Failure
+
+Predict what happens:
+
+const p1 = new Promise(resolve =>
+    setTimeout(() => resolve("P1"), 3000)
+);
+
+const p2 = new Promise((resolve, reject) =>
+    setTimeout(() => reject("P2 Failed"), 1000)
+);
+
+const p3 = new Promise(resolve =>
+    setTimeout(() => resolve("P3"), 2000)
+);
+
+Promise.all([p1, p2, p3])
+    .then(console.log)
+    .catch(console.log);
+
+Answer:
+
+1. When does catch execute?immediatly after timer is hit
+
+2. What happens to p1?p1 can still resolve but as prmise.all is failed it only gives output of P2 which is rejected first
+
+3. What happens to p3?p3 can still resolve but as prmise.all is failed it only gives output of P2 which is rejected first
+
+4. Does Promise.all() cancel p1 and p3?no they dont cancel ongoing promises 
+
+5. Why?promise.all is used to run and get output of three if all get success it prints all outputs but if one fails only rejected output will shown but other promises have also reslved only output not shown
+
+
+Q16 — Promise.allSettled() Result Structure
+
+Predict the approximate structure:
+
+Promise.allSettled([
+    Promise.resolve("A"),
+    Promise.reject("B")
+]).then(console.log);
+
+Write the result yourself:
+
+[
+  { status: 'fulfilled', value: 'A' },
+  { status: 'rejected', reason: 'B' }
+]
+
+
+
+Q18 — Promise.race() vs Promise.any()
+
+Given:
+
+const p1 = new Promise((resolve, reject) =>
+    setTimeout(() => reject("P1 Failed"), 1000)
+);
+
+const p2 = new Promise(resolve =>
+    setTimeout(() => resolve("P2 Success"), 3000)
+);
+
+
+Part A
+
+What happens with:
+
+Promise.race([p1, p2])
+    .then(console.log)
+    .catch(console.log);
+
+    here which ever is executed or gives result first whether it is resolve/rejected dont care so it gives P1 Failed as output because its timer got first
+Part B
+
+What happens with:
+
+Promise.any([p1, p2])
+    .then(console.log)
+    .catch(console.log);
+
+    Here Promise.any is focusing on first succes/resolve and prints P2 Success it dont care first output got from P1 was rejected 
+
+
+Part C
+
+Explain the difference in one sentence:
+
+Promise.race() → just like a race which gives output first it will be printed no preference for reolve/reject
+Promise.any()  →waits for first success/resolve until it gets one,if all promises are rejected then its gives an agggregted error
+
+
+Q22 — this Call-Site Trap
+
+Predict exactly what happens:
+
+"use strict";
+
+const obj = {
+    name: "Arun",
+
+    test: function () {
+        console.log(this.name);
+    }
+};
+
+const fn = obj.test;
+
+fn();
+
+Answer:
+
+Does it print "Arun"? no 
+
+If not, what happens?IT WILL SHOWING A TYPE ERROR
+
+What is `this` inside test()?IN STRICT MDE this INSIDE test() undefeined
+
+Why did `this` change when we assigned:
+const fn = obj.test;
+in js,this is defined how  fn been called at the call-site ,here the test() is called as an attachment to obj with a dot refernece so here this will be obj
+but when const fn = obj.test ,here the  test()is extraxted into const fn so its refenrce to obj is lost so the value become undefined

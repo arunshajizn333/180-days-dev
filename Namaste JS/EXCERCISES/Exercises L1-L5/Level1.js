@@ -17,3 +17,4 @@ const Q3= new Promise ((res,rej)=>{
 Q3
 .then(value=>console.log(value))
 .catch(err=>console.log(err))
+

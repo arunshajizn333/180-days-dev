@@ -1,0 +1,415 @@
+Q1. Predict the output and explain the order.
+
+console.log("A");
+
+const p = new Promise((resolve) => {
+    console.log("B");
+
+    resolve("C");
+});
+
+console.log("D");
+
+p.then((value) => {
+    console.log(value);
+});
+
+console.log("E");
+
+Output:
+1.A
+2.D
+3.B
+4.C
+5.E
+
+Why: after A it prints d becuase promise createted but not called or used till that time ,after d p.then is called and b is printed also value in reslve C is also printed then js moves to print E
+
+Q2. Create your own Promise
+
+Create a Promise that:
+
+waits 2 seconds
+resolves with "Data received"
+prints the result using .then()
+
+Don't use async/await.
+
+const p= new Promise ((res,rej)=>{
+    setTimeout(function(){
+        res("Data Recieved")
+    },2000)
+
+})
+
+p.then(value=>console.log(value))
+
+Q3. Promise rejection
+
+Create a Promise that:
+
+waits 1 second
+rejects with "Something went wrong"
+handles the error using .catch()
+
+const Q3= new Promise ((res,rej)=>{
+    setTimeout(function(){
+        rej("Something went wrong")
+    },1000)
+
+})
+
+Q3
+.then(value=>console.log(value))
+.catch(err=>console.log(err))
+
+Q4. Promise states
+
+What will this print?
+
+const p = new Promise((resolve, reject) => {
+    resolve("Success");
+    reject("Error");
+});
+
+p.then(console.log).catch(console.log);
+
+Why doesn't "Error" get printed?
+
+ans:it printed succes bcz a primise will anyways will be settled and her as there are no error in promise it is fulfilled also by using .then and log in it ,.then always expects a callback fn and console.log is already a fn
+
+LEVEL2
+Q5. What does an async function return?
+
+async function test() {
+    return "Hello";
+}
+
+console.log(test());
+
+What is the type of the returned value?
+its prints Hello bcz an async fn always return a promise,
+
+Then modify the code so "Hello" is printed using await.
+
+async function test() {
+    return "Hello"
+}
+
+async function main() {
+    let data= await test()
+    console.log(data);
+}
+
+main()
+
+Q6. Predict the output
+
+async function test() {
+    console.log("A");
+
+    await Promise.resolve();
+
+    console.log("B");
+}
+
+console.log("C");
+
+test();
+
+console.log("D");
+
+Don't just give the output. Explain why B comes where it does.
+
+it will be like first c then it moves to aysnc fn asit is called and prints A then an await is regiesterd then if await is nor resolved right away it moves towards to print d then only after  await Promise.resolve();
+is reolved it prints c
+
+
+
+
+Q7. Sequential execution
+
+Write an async function that does:
+
+Wait 2 seconds → print "First"
+Wait 1 second → print "Second"
+Wait 1 second → print "Third"
+
+Expected:
+
+First   → 2s
+Second  → 3s
+Third   → 4s
+
+// Q7. Sequential execution
+
+const p1= new Promise ((res,rej)=>{
+    setTimeout(function(){
+        res("First")
+    },2000)
+
+})
+const p2= new Promise ((res,rej)=>{
+    setTimeout(function(){
+        res("Second")
+    },3000)
+
+})
+const p3= new Promise ((res,rej)=>{
+    setTimeout(function(){
+        res("Third")
+    },4000)
+
+})
+
+async function sequential() {
+    const data1=await p1
+    console.log(data1);
+    
+    const data2=await p2
+     console.log(data2);
+    
+    const data3=await p3
+     console.log(data3);
+    
+}
+sequential()
+
+Q8. Parallel execution
+
+Now rewrite Q7 so all three timers start at the same time.
+
+Expected:
+
+First  → 2s
+Second → 1s
+Third  → 1s
+
+Total time should be approximately 2 seconds, not 4.
+
+Use:
+
+Promise.all()
+
+const p1= new Promise ((res,rej)=>{
+    setTimeout(function(){
+        res("First")
+    },2000)
+
+})
+const p2= new Promise ((res,rej)=>{
+    setTimeout(function(){
+        res("Second")
+    },1000)
+
+})
+const p3= new Promise ((res,rej)=>{
+    setTimeout(function(){
+        res("Third")
+    },1000)
+
+})
+
+const data=Promise.all([p1,p2,p3])
+console.log(await data);
+
+LEVEL3
+
+Q9. Basic fetch
+
+Using this API:
+
+https://jsonplaceholder.typicode.com/users/1
+
+Write an async function that:
+
+calls fetch()
+waits for the response
+converts the response to JSON
+prints the JSON
+
+No .then().
+
+const data=  fetch("https://jsonplaceholder.typicode.com/users/1")
+
+async function connectUser() {
+    const userData=await data
+    const user1= await userData.json()
+    console.log(user1);
+    
+    
+}
+connectUser()
+
+
+Q10. Extract data
+
+Using the same API, print only:
+
+Name:
+Email:
+City:
+
+Don't print the entire object.
+
+const data=  fetch("https://jsonplaceholder.typicode.com/users/1")
+
+async function connectUser() {
+    const userData=await data
+    const user1= await userData.json()
+    return user1
+    
+}
+
+
+async function UserDetails() {
+    
+    const userDetail= await connectUser()
+    const {name,email}=userDetail
+    const {city}=userDetail.address
+
+    console.log(name,email,city);
+}
+
+UserDetails()
+
+
+Q11. Error handling
+
+Modify Q9 so that:
+
+successful request → print data
+failed request → print "Failed to fetch data"
+
+Use try...catch.
+
+async function connectUser() {
+
+    try {
+        const userData = await data
+        const user1 = await userData.json() 
+        return user1
+
+    }
+    catch (error) {
+        console.error("Failed to fetch data");
+    }
+
+
+}
+
+
+Q12. Understand the two awaits
+
+Explain this line by line:
+
+const response = await fetch(url);
+const data = await response.json();
+
+Your answer must contain:
+
+fetch() returns: a promise
+response contains: response object
+response.json() returns: contains parsed json
+data contains:json object
+
+LEVEL4
+Q13. Predict the output
+
+const p1 = new Promise(resolve =>
+    setTimeout(() => resolve("P1"), 3000)
+);
+
+const p2 = new Promise(resolve =>
+    setTimeout(() => resolve("P2"), 1000)
+);
+
+const p3 = new Promise(resolve =>
+    setTimeout(() => resolve("P3"), 2000)
+);
+
+Promise.all([p1, p2, p3])
+    .then(result => console.log(result));
+
+Questions:
+
+When does it print? after 3s
+What is the array? [P1,p2,p3]
+Why isn't the array [P2, P3, P1]?because promise .all maintains the ordginal order of the input array,regardless of which promise resolve first
+
+
+Q14. Promise.all() failure
+
+const p1 = new Promise(resolve =>
+    setTimeout(() => resolve("P1"), 3000)
+);
+
+const p2 = new Promise((resolve, reject) =>
+    setTimeout(() => reject("P2 Failed"), 1000)
+);
+
+const p3 = new Promise(resolve =>
+    setTimeout(() => resolve("P3"), 2000)
+);
+
+Promise.all([p1, p2, p3])
+    .then(console.log)
+    .catch(console.log);
+
+Answer:
+
+When does catch execute?immediatly when catch caughts reject
+What happens to p1?its output will not be considered as promise.all only gives output if all are resolved and if any one of them fails whole output will not be printed only first catch will be printed
+What happens to p3?its output will not be considered as promise.all only gives output if all are resolved and if any one of them fails whole output will not be printed only first catch will be printed
+Why?its output will not be considered as promise.all only gives output if all are resolved and if any one of them fails whole output will not be printed only first catch will be printed
+
+LEVEL5
+Q15.
+
+Given:
+
+const p1 = Promise.resolve("User");
+const p2 = Promise.reject("Settings Error");
+const p3 = Promise.resolve("Permissions");
+
+Use:
+
+Promise.allSettled()
+
+and print each result as:
+
+Success: User
+Failed: Settings Error
+Success: Permissions
+
+const p1 = Promise.resolve("User");
+const p2 = Promise.reject("Settings Error");
+const p3 = Promise.resolve("Permissions");
+
+Promise.allSettled([p1, p2, p3])
+  .then(results=>{
+    results.forEach(result=>{
+        if(result.status=="fulfilled"){
+            console.log(`Succes : ${result.value}`); 
+        }
+        else{
+             console.log(`Failed : ${result.value}`); 
+        }
+    })
+
+  });
+
+  Q16. Predict the structure
+
+What does this produce?
+
+Promise.allSettled([
+    Promise.resolve("A"),
+    Promise.reject("B")
+]).then(console.log);
+
+Don't just say "array".
+
+Write the approximate object structure.
+
+it will print similar to what we got in Q15 as an array-object with status:fulfilled/rejected and value 
