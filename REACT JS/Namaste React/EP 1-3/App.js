@@ -33,10 +33,10 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 // React Element
 const heading = (
   <h1 className="head" tabIndex={5}>
-    namaste javascript
+    namaste javascript react element
   </h1>
 );
-
+ 
 const Title =()=>(
   <div>
     <h1>

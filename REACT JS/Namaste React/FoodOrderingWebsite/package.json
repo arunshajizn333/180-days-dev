@@ -1,0 +1,28 @@
+{
+  "name": "namaste-react",
+  "version": "1.0.0",
+  "description": "Learning with Akshayi Saini",
+  "homepage": "https://github.com/arunshajizn333/180-days-dev#readme",
+  "bugs": {
+    "url": "https://github.com/arunshajizn333/180-days-dev/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arunshajizn333/180-days-dev.git"
+  },
+  "license": "ISC",
+  "author": "ARUN SHAJI",
+  "type": "commonjs",
+  "scripts": {
+    "test": "jest",
+    "start": "parcel index.html",
+    "build": "parcel build index.html --dist-dir build"
+  },
+  "devDependencies": {
+    "parcel": "^2.16.4"
+  },
+  "dependencies": {
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  }
+}
