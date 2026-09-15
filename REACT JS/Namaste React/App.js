@@ -30,11 +30,47 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 // JSX
 
+// React Element
 const heading = (
   <h1 className="head" tabIndex={5}>
     namaste javascript
   </h1>
 );
-root.render(heading);
+
+const Title =()=>(
+  <div>
+    <h1>
+      Title of our page 
+    </h1>
+  </div>
+
+)
+
+
+// React Functionel Component and Functionel Composition
+const HeadingComponent = ()=>(
+  <div>
+    <Title/>
+    <h1 className="new h1">
+    Hi from inside of component
+  </h1>
+
+  </div>
+  
+)
+
+// Another way of writing Functional Component
+
+const HeadingComponent2=()=>{
+  return <div>
+    <h1 className="new h1">
+    Hi from inside of  component  from HeadingComponent2
+  </h1>
+
+  </div>
+}
+
+
+root.render(<HeadingComponent/>);
 
 
