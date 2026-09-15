@@ -6,6 +6,8 @@ import locationIcon from "url:./assets/location.png";
 import profileIcon from "url:./assets/profile.png";
 import cartIcon from "url:./assets/cart.png";
 
+
+
 const NavBar = () => (
     <header className="navbar-wrapper">
         <div className="navbar">
@@ -47,11 +49,51 @@ const NavBar = () => (
     </header>
 );
 
+const HeroSection = () => (
+    <div className="hero-section">
+        <p>Delicious Food, Delivered</p>
+        <h1>Good Food <br/>
+        Makes a <span>Great Day</span></h1>
+        <h4>Discover the best restaurants near you.</h4>
+        <input type="text" placeholder="Search for restaurants or dishes" className="search-input" />
+        <p>Popular searches: Pizza, Burger, Pasta</p>
+    </div>       
+)
+const CategorySection = () => (
+    <div className="category-section">
+
+        
+
+    </div>
+)
+const OfferSection = () => (
+    <div className="offer-section">
+
+    </div>
+)
+const RestaurantSection = () => (
+    <div className="res-section">
+
+    </div>
+)
+const footer = () => (
+    <div className="footer">
+    </div>
+)
+
+
+
 const App = () => (
     <div className="app-container">
         <NavBar />
+        <HeroSection />
+        <CategorySection />
+        <OfferSection />
+        <RestaurantSection />
+        <footer />
     </div>
 );
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<App />);

@@ -259,3 +259,125 @@ body {
         display: none;
     }
 }
+
+
+/* =========================
+   HERO SECTION
+========================= */
+
+.hero-section {
+    width: 100%;
+    min-height: 250px;
+    box-sizing: border-box;
+    padding: 45px 120px;
+    border-radius: 12px;
+
+    
+    background-image: url("./assets/hero-background.png");
+    background-repeat: no-repeat;
+    background-position: right center;
+   
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+
+/* Small heading */
+
+.hero-section > p:first-child {
+    margin: 0 0 8px 0;
+
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    color: #555;
+}
+
+
+/* Main heading */
+
+.hero-section h1 {
+    margin: 0;
+
+    font-size: 52px;
+    line-height: 1.05;
+    font-weight: 800;
+
+    color: #171717;
+}
+.hero-section h1 span {
+    color: rgb(252, 80, 6);
+}
+
+
+/* "Great Day" */
+
+.hero-section h1 {
+    max-width: 550px;
+}
+
+
+/* Description */
+
+.hero-section h4 {
+    margin: 12px 0 22px 0;
+
+    font-size: 18px;
+    font-weight: 00;
+
+    color: #555;
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-input {
+    width: 500px;
+    height: 52px;
+
+    box-sizing: border-box;
+
+    padding: 0 20px;
+
+    border: 1px solid #ddd;
+    border-radius: 8px;
+
+    background-color: white;
+
+    font-size: 15px;
+    color: #333;
+
+    outline: none;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+
+.search-input::placeholder {
+    color: #888;
+}
+
+
+.search-input:focus {
+    border-color: #ff5722;
+}
+
+
+/* =========================
+   POPULAR SEARCHES
+========================= */
+
+.hero-section > p:last-child {
+    margin: 14px 0 0 0;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    color: #333;
+}
