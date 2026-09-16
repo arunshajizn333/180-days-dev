@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-import { CATEGORIES,RESTAURANTS } from "./datas.js";
+import { CATEGORIES, RESTAURANTS } from "./datas.js";
 
 import logo from "url:./assets/logo2.png";
 import locationIcon from "url:./assets/location.png";
@@ -88,77 +88,84 @@ const CategorySection = () => (
   </div>
 );
 
+// 1. Single Card: receives 1 restaurant via props
+const RestaurantCard = (props) => {
+  const { restaurantData } = props;
+  const {
+    name,
+    cuisines,
+    rating,
+    reviews,
+    priceForTwo,
+    deliveryTime,
+    freeDelivery,
+    image,
+  } = restaurantData;
 
-
-const RestaurantSection = (props) => {
-  
-    const {restaurantData}=props;
-    const {name,cuisines,rating,reviews,priceForTwo,deliveryTime,freeDelivery,image}=restaurantData;
-   
-  
-
-  return(
-  
-  <section className="res-section">
-    {/* Section Header */}
-    <div className="res-header">
-      <h2 className="res-title">Popular Restaurants</h2>
-      <a href="#all" className="see-all-link">
-        See All <span>→</span>
-      </a>
-    </div>
-
-   {/* Cards Grid */}
-
-   <div className="res-grid ">
+  return (
     <div className="res-card">
       <div className="res-img-container">
-          <img alt="res-img" className="res-img" src={image} />
+        <img src={image} alt={name} className="res-img" />
+        <button className="heart-btn" aria-label="Favorite">♡</button>
+
+        <div className="delivery-badge">
+          <span className="clock-icon">🕒</span>
+          <span>{deliveryTime}</span>
+        </div>
       </div>
-      
-    
+
+      <div className="res-info">
+        <h3 className="res-name">{name}</h3>
+        <p className="res-cuisines">{cuisines}</p>
+        <div className="res-rating-row">
+          <span className="star-icon">★</span>
+          <span className="rating-score">{rating}</span>
+          <span className="rating-count">({reviews})</span>
+        </div>
+        <div className="res-footer">
+          <span className="price-text">{priceForTwo}</span>
+          {freeDelivery && (
+            <span className="free-delivery-badge">Free Delivery</span>
+          )}
+        </div>
+      </div>
     </div>
-
-   </div>
-
-    
-
-
-  </section>
-  )
+  );
 };
 
-const OfferSection = () => <div className="offer-section"></div>;
+// 2. Section: receives the whole array via props
+const RestaurantSection = (props) => {
+  const { restaurantList } = props;
 
-const Footer = () => <div className="footer"></div>;
+  return (
+    <section className="res-section">
+      <div className="res-header">
+        <h2 className="res-title">Popular Restaurants</h2>
+        <a href="#all" className="see-all-link">
+          See All <span>→</span>
+        </a>
+      </div>
 
+      {/* ONE grid wrapping all cards */}
+      <div className="res-grid">
+        {restaurantList.map((restaurant) => (
+          <RestaurantCard key={restaurant.id} restaurantData={restaurant} />
+        ))}
+      </div>
+    </section>
+  );
+};
+
+// 3. App passes RESTAURANTS via props
 const App = () => (
   <div className="app-container">
     <NavBar />
     <HeroSection />
     <CategorySection />
-
-  {RESTAURANTS.map(restaurant=>{
-    
-    <RestaurantSection 
-    key={restaurant.id}
-    restaurantData={restaurant}
-
-
-
-
-    />
-
-  })}
-    
-
-
-
-
-    <OfferSection />
-    <Footer />
+    <RestaurantSection restaurantList={RESTAURANTS} />
   </div>
 );
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<App />);
