@@ -7,7 +7,7 @@
   --text-muted: #727782;
   --text-sub: #4b515d;
   --border-color: #eceef2;
-  --bg-page: #fbfbfc;
+  --bg-page: #f8f8f6;
   --transition: all 0.2s ease-in-out;
 }
 
@@ -320,7 +320,7 @@ body {
 
 .category-section {
   width: 100%;
-  background-color: #ffffff;
+  background-color: #f8f8f6;
   border-bottom: 1px solid #f0f0f0;
   padding: 24px 0 10px 0;
 }
@@ -696,4 +696,47 @@ body {
   .res-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* Filter Buttons */
+.res-filter {
+  display: flex;
+  gap: 12px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 10px 18px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  background-color: #fff;
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Hover */
+.filter-btn:hover {
+  background-color: #f5f5f5;
+  border-color: #bbb;
+  transform: translateY(-1px);
+}
+
+/* Click */
+.filter-btn:active {
+  transform: scale(0.96);
+}
+
+/* First button - All */
+.filter-btn:first-child {
+  background-color: #ff5200;
+  color: white;
+  border-color: #ff5200;
+}
+
+.filter-btn:first-child:hover {
+  background-color: #e84900;
 }
