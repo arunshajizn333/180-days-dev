@@ -488,11 +488,58 @@ body {
   margin-bottom: 22px;
 }
 
+.res-header-left {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
 .res-title {
   font-size: 26px;
   font-weight: 800;
   color: #1a1a1a;
   letter-spacing: -0.4px;
+}
+
+.res-count-badge {
+  font-size: 13px;
+  font-weight: 600;
+  color: #888d96;
+  background-color: #f1f2f5;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.res-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.reload-shimmer-btn {
+  background: #ffffff;
+  border: 1px solid #e2e4e8;
+  color: #555c68;
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s ease;
+}
+
+.reload-shimmer-btn:hover {
+  background: #f8f9fa;
+  border-color: #ff5200;
+  color: #ff5200;
+  transform: translateY(-1px);
+}
+
+.reload-shimmer-btn:active {
+  transform: scale(0.96);
 }
 
 .see-all-link {
@@ -529,6 +576,18 @@ body {
   flex-direction: column;
   cursor: pointer;
   transition: transform 0.22s ease, box-shadow 0.22s ease;
+  animation: fadeInCard 0.35s ease-out;
+}
+
+@keyframes fadeInCard {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .res-card:hover {
@@ -579,6 +638,11 @@ body {
 .heart-btn:hover {
   background: rgba(255, 82, 0, 0.9);
   transform: scale(1.1);
+}
+
+.heart-btn.favorited {
+  background: rgba(255, 82, 0, 0.95);
+  transform: scale(1.05);
 }
 
 /* Time Badge (Bottom Right of Image) */
@@ -719,24 +783,257 @@ body {
 }
 
 /* Hover */
-.filter-btn:hover {
+.filter-btn:hover:not(:disabled) {
   background-color: #f5f5f5;
   border-color: #bbb;
   transform: translateY(-1px);
 }
 
 /* Click */
-.filter-btn:active {
+.filter-btn:active:not(:disabled) {
   transform: scale(0.96);
 }
 
-/* First button - All */
-.filter-btn:first-child {
-  background-color: #ff5200;
-  color: white;
-  border-color: #ff5200;
+.filter-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
 }
 
-.filter-btn:first-child:hover {
+/* Active Filter State */
+.filter-btn.active {
+  background-color: #ff5200;
+  color: #ffffff;
+  border-color: #ff5200;
+  box-shadow: 0 4px 12px rgba(255, 82, 0, 0.25);
+}
+
+.filter-btn.active:hover {
   background-color: #e84900;
+  border-color: #e84900;
+}
+
+/* Empty State */
+.no-res-found {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 20px;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px dashed #e2e4e8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.no-res-found p {
+  font-size: 16px;
+  color: #6a717e;
+  font-weight: 500;
+}
+
+/* ===================================================
+   RESTAURANT SHIMMER / SKELETON (HIGH-ACCURACY, ZERO-CLS)
+=================================================== */
+
+.shimmer-wrapper {
+  display: contents;
+}
+
+/* Standalone fallback if .shimmer-wrapper is used outside .res-grid */
+.shimmer-wrapper:not(.res-grid) {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+/* Skeleton Card: Matches .res-card 1:1 */
+.shimmer-card {
+  height: 100%;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #f0f0f2;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Unified Skeleton Wave Animation */
+.skeleton-pulse {
+  position: relative;
+  overflow: hidden;
+  background-color: #f1f3f6;
+}
+
+.skeleton-pulse::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.45) 30%,
+    rgba(255, 255, 255, 0.85) 50%,
+    rgba(255, 255, 255, 0.45) 70%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: shimmerWave 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes shimmerWave {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Image Skeleton - Matches .res-img-container (185px) */
+.shimmer-img-container {
+  position: relative;
+  width: 100%;
+  height: 185px;
+  overflow: hidden;
+  background-color: #eceff2;
+}
+
+.shimmer-img {
+  width: 100%;
+  height: 100%;
+}
+
+/* Favorite Heart Button Skeleton - Matches .heart-btn */
+.shimmer-heart-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: rgba(224, 228, 235, 0.9);
+  backdrop-filter: blur(4px);
+}
+
+/* Delivery Time Badge Skeleton - Matches .delivery-badge */
+.shimmer-delivery-badge {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 90px;
+  height: 24px;
+  border-radius: 20px;
+  background-color: rgba(215, 220, 228, 0.85);
+  backdrop-filter: blur(5px);
+}
+
+/* Info Container - Matches .res-info (16px 18px) */
+.shimmer-info {
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Title Line - Matches .res-name */
+.shimmer-title {
+  width: 72%;
+  height: 19px;
+  border-radius: 6px;
+  margin-bottom: 7px;
+}
+
+/* Cuisine Line - Matches .res-cuisines */
+.shimmer-cuisine {
+  width: 88%;
+  height: 13px;
+  border-radius: 4px;
+  margin-bottom: 13px;
+}
+
+/* Rating Row - Matches .res-rating-row */
+.shimmer-rating-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 13px;
+}
+
+.shimmer-rating-pill {
+  width: 52px;
+  height: 18px;
+  border-radius: 6px;
+}
+
+.shimmer-rating-count {
+  width: 44px;
+  height: 13px;
+  border-radius: 4px;
+}
+
+/* Footer Section - Matches .res-footer */
+.shimmer-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px dashed #f0f0f2;
+  padding-top: 12px;
+}
+
+.shimmer-price {
+  width: 84px;
+  height: 15px;
+  border-radius: 4px;
+}
+
+.shimmer-badge {
+  width: 86px;
+  height: 22px;
+  border-radius: 12px;
+}
+
+/* ===================================================
+   RESPONSIVE SHIMMER
+=================================================== */
+
+@media (max-width: 1080px) {
+  .shimmer-wrapper:not(.res-grid) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .shimmer-wrapper:not(.res-grid) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .res-header-actions {
+    gap: 10px;
+  }
+  .reload-shimmer-btn {
+    font-size: 11.5px;
+    padding: 5px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .shimmer-wrapper:not(.res-grid) {
+    grid-template-columns: 1fr;
+  }
+  .res-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .res-header-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
 }
