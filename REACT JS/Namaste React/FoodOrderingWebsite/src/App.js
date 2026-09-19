@@ -12,7 +12,7 @@ const App = () => (
   <div className="app-container">
     <NavBar />
     <HeroSection />
-    {/* <CategorySection /> */}
+    <CategorySection />
     <RestaurantSection restaurantList={RESTAURANTS} />
   </div>
 );

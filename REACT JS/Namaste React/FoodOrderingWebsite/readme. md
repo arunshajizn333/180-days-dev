@@ -1,1 +1,23 @@
-Learning with Akshay Saini
+Learning React by building a food ordering website is a great way to understand the fundamentals of React 
+and how to create dynamic web applications.
+
+ In this project, am learning how to:
+
+- Set up a React project using parcel
+-Learn about JSX and how to create functional components
+-Understanding how  React actually works under the hood
+- Create reusable components for the food items and order summary
+-Understand how props and state work in React
+- Manage state using React hooks
+-React Fibers and how they improve performance
+-React Reconciler and how it helps in updating the UI efficiently
+-React Virtual DOM and how it optimizes rendering
+-React Reconciler Algorithms and how they determine the most efficient way to update the UI by 
+ comparing the current and previous virtual DOM trees.
+ -Loading data from an API and displaying it in the UI
+ -Loading website-rendering-api data -rerendering the UI based on the data received from the API
+ -useEffect to handle rerendering and side effects in functional components
+ -How shimming works in React and how it allows for better performance and code splitting
+ -Understanding how React handles events and how to create event handlers for user interactions
+ 
+
