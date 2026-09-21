@@ -8,14 +8,20 @@ import RestaurantSection from "./components/RestaurantSection.js";
 
 import { RESTAURANTS } from "./utils/mockDatas.js";
 
-const App = () => (
-  <div className="app-container">
+const App = () => {
+  
+
+
+  return(
+      <div className="app-container">
     <NavBar />
     <HeroSection />
     <CategorySection />
     <RestaurantSection restaurantList={RESTAURANTS} />
   </div>
-);
+  )
+
+}
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

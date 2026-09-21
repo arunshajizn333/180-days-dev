@@ -25,6 +25,8 @@ const RestaurantCard = (props) => {
     setIsFavorite(!isFavorite);
   };
 
+  console.log("Restaurant Data:", restaurantData)
+
   return (
     <div className="res-card">
       <div className="res-img-container">

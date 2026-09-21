@@ -1,26 +1,42 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import RestaurantCard from "./RestaurantCard.js";
 import { ShimmerCard } from "./Shimmers.js";
 
-const RestaurantSection = (props) => {
-  const { restaurantList = [] } = props;
+const RestaurantSection = () => {
+  const [restaurantList, setRestaurantList] = useState([]);
 
-  const [isLoading, setIsLoading] = useState(true);
-  const [resList, setResList] = useState([]);
+  const [resList, setResList] = useState(restaurantList);
+
+
+  const [isLoading, setIsLoading] = useState(false);
   const [activeFilter, setActiveFilter] = useState("all");
+  const [fetchError, setFetchError] = useState("");
+
+
+const fetchdata = async () => {
+  const data = await fetch(
+    "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9352403&lng=77.624532&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+  );
+
+  const json = await data.json();
+
+  console.log(
+    json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants
+  );
+
+  setRestaurantList(
+    json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants
+  );
+};
+
 
   useEffect(() => {
-    setIsLoading(true);
-    const timer = setTimeout(() => {
-      setResList(restaurantList);
-      setIsLoading(false);
-    }, 1800);
-
-    return () => clearTimeout(timer);
-  }, [restaurantList]);
+    fetchdata();
+  }, []);
 
   const handleFilterAll = () => {
     setActiveFilter("all");
+    setFetchError("");
     setResList(restaurantList);
   };
 
@@ -77,6 +93,8 @@ const RestaurantSection = (props) => {
       </div>
 
       <div className="res-filter">
+        {fetchError && <p className="res-error">{fetchError}</p>}
+
         {/* All */}
         <button
           className={`filter-btn ${activeFilter === "all" ? "active" : ""}`}
@@ -128,7 +146,7 @@ const RestaurantSection = (props) => {
           </div>
         ) : (
           resList.map((res) => (
-            <RestaurantCard key={res.id} restaurantData={res} />
+            <RestaurantCard key={res.info.id} restaurantData={res} />
           ))
         )}
       </div>
