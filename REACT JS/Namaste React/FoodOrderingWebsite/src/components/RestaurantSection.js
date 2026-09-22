@@ -4,30 +4,47 @@ import { ShimmerCard } from "./Shimmers.js";
 
 const RestaurantSection = () => {
   const [restaurantList, setRestaurantList] = useState([]);
+  const [resList, setResList] = useState([]);
 
-  const [resList, setResList] = useState(restaurantList);
-
-
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState("all");
   const [fetchError, setFetchError] = useState("");
 
 
-const fetchdata = async () => {
-  const data = await fetch(
-    "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9352403&lng=77.624532&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-  );
+  const fetchdata = async () => {
+    const shimmerStartedAt = Date.now();
+    const minimumShimmerDuration = 350;
 
-  const json = await data.json();
+    setIsLoading(true);
+    setFetchError("");
 
-  console.log(
-    json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants
-  );
+    try {
+      const response = await fetch(
+        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9352403&lng=77.624532&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      );
 
-  setRestaurantList(
-    json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants
-  );
-};
+      if (!response.ok) {
+        throw new Error("Unable to load restaurants.");
+      }
+
+      const json = await response.json();
+      const restaurants =
+        json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants;
+
+      setRestaurantList(restaurants);
+      setResList(restaurants);
+    } catch (error) {
+      setFetchError(error.message);
+    } finally {
+      const elapsed = Date.now() - shimmerStartedAt;
+      const remainingShimmerTime = Math.max(0, minimumShimmerDuration - elapsed);
+
+      await new Promise((resolve) => setTimeout(resolve, remainingShimmerTime));
+      setIsLoading(false);
+    }
+  };
+
+
 
 
   useEffect(() => {
@@ -42,18 +59,18 @@ const fetchdata = async () => {
 
   const handleFilterRating = () => {
     setActiveFilter("rating");
-    setResList(restaurantList.filter((r) => r.rating >= 4.0));
+    setResList(restaurantList.filter((r) => Number(r.info.avgRating) >= 4.0));
   };
 
   const handleFilterVeg = () => {
     setActiveFilter("veg");
-    setResList(restaurantList.filter((r) => r.isVeg));
+    setResList(restaurantList.filter((r) => r.info.veg));
   };
 
   const handleFilterDelivery = () => {
     setActiveFilter("delivery");
     const sorted = [...restaurantList].sort(
-      (a, b) => parseInt(a.deliveryTime, 10) - parseInt(b.deliveryTime, 10)
+      (a, b) => a.info.sla.deliveryTime - b.info.sla.deliveryTime
     );
     setResList(sorted);
   };

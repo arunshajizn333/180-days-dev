@@ -12,25 +12,30 @@ const RestaurantCard = (props) => {
   const {
     name,
     cuisines,
-    rating,
-    reviews,
-    priceForTwo,
-    deliveryTime,
-    freeDelivery,
-    image,
-  } = restaurantData;
+    avgRating: rating,
+    totalRatingsString: reviews,
+    costForTwo: priceForTwo,
+    sla: { deliveryTime, slaString } = {},
+    aggregatedDiscountInfoV3: {
+      discountCalloutInfo: { message: freeDelivery } = {},
+    } = {},
+    cloudinaryImageId,
+  } = restaurantData.info;
+
+  const image = cloudinaryImageId
+    ? `https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/${cloudinaryImageId}`
+    : "";
+  const cuisineList = cuisines?.join(", ") || "";
+  const deliveryLabel = slaString || (deliveryTime ? `${deliveryTime} min` : "Delivery time unavailable");
 
   const handleFavoriteClick = (e) => {
     e.stopPropagation();
     setIsFavorite(!isFavorite);
   };
-
-  console.log("Restaurant Data:", restaurantData)
-
   return (
     <div className="res-card">
       <div className="res-img-container">
-        <img src={image} alt={name} className="res-img" loading="lazy" />
+        {image && <img src={image} alt={name} className="res-img" loading="lazy" />}
         <button
           className={`heart-btn ${isFavorite ? "favorited" : ""}`}
           aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
@@ -41,22 +46,24 @@ const RestaurantCard = (props) => {
 
         <div className="delivery-badge">
           <span className="clock-icon">🕒</span>
-          <span>{deliveryTime}</span>
+          <span>{deliveryLabel}</span>
         </div>
       </div>
 
       <div className="res-info">
         <h3 className="res-name" title={name}>{name}</h3>
-        <p className="res-cuisines" title={cuisines}>{cuisines}</p>
+        <p className="res-cuisines" title={cuisineList}>{cuisineList}</p>
         <div className="res-rating-row">
           <span className="star-icon">★</span>
           <span className="rating-score">{rating}</span>
           <span className="rating-count">({reviews})</span>
+           <span className="delivery-text">{deliveryLabel}</span>
         </div>
         <div className="res-footer">
+         
           <span className="price-text">{priceForTwo}</span>
           {freeDelivery && (
-            <span className="free-delivery-badge">Free Delivery</span>
+            <span className="free-delivery-badge">{freeDelivery}</span>
           )}
         </div>
       </div>
