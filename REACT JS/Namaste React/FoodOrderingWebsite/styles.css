@@ -731,9 +731,31 @@ body {
 }
 
 .delivery-text {
-  font-size: 12px;
-  font-weight: 500;
-  color: #7b8089;
+  margin-left: auto;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #4b515d;
+  background-color: #f4f5f8;
+  border: 1px solid #e8eaf0;
+  padding: 3px 9px;
+  border-radius: 14px;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+}
+
+.delivery-text::before {
+  content: "⏱";
+  font-size: 11px;
+  opacity: 0.75;
+}
+
+.res-card:hover .delivery-text {
+  background-color: #fff4ed;
+  border-color: #fed7c3;
+  color: var(--primary);
 }
 
 .free-delivery-badge {
@@ -980,6 +1002,13 @@ body {
 
 .shimmer-rating-count {
   width: 44px;
+  height: 13px;
+  border-radius: 4px;
+}
+
+.shimmer-delivery {
+  margin-left: auto;
+  width: 52px;
   height: 13px;
   border-radius: 4px;
 }
