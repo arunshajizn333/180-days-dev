@@ -636,12 +636,12 @@ body {
 }
 
 .heart-btn:hover {
-  background: rgba(255, 82, 0, 0.9);
+  background: rgba(60, 56, 53, 0.9);
   transform: scale(1.1);
 }
 
 .heart-btn.favorited {
-  background: rgba(255, 82, 0, 0.95);
+  background: rgba(60, 56, 53, 0.9);;
   transform: scale(1.05);
 }
 
@@ -866,15 +866,12 @@ body {
 =================================================== */
 
 .shimmer-wrapper {
-  display: contents;
-}
-
-/* Standalone fallback if .shimmer-wrapper is used outside .res-grid */
-.shimmer-wrapper:not(.res-grid) {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
 }
+
+/* Standalone fallback if .shimmer-wrapper is used outside .res-grid */
 
 /* Skeleton Card: Matches .res-card 1:1 */
 .shimmer-card {
@@ -1039,13 +1036,13 @@ body {
 =================================================== */
 
 @media (max-width: 1080px) {
-  .shimmer-wrapper:not(.res-grid) {
+  .shimmer-wrapper {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (max-width: 768px) {
-  .shimmer-wrapper:not(.res-grid) {
+  .shimmer-wrapper {
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
   }
@@ -1059,7 +1056,7 @@ body {
 }
 
 @media (max-width: 480px) {
-  .shimmer-wrapper:not(.res-grid) {
+  .shimmer-wrapper {
     grid-template-columns: 1fr;
   }
   .res-header {

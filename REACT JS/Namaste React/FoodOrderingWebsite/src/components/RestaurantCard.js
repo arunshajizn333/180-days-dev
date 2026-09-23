@@ -1,13 +1,11 @@
 import { useState } from "react";
-import { ShimmerCard } from "./Shimmers.js";
+import { ShimmerCard ,Shimmers} from "./Shimmers.js";
 
 const RestaurantCard = (props) => {
   const { restaurantData, isLoading } = props;
   const [isFavorite, setIsFavorite] = useState(false);
 
-  if (isLoading || !restaurantData) {
-    return <ShimmerCard />;
-  }
+ 
 
   const {
     name,
@@ -32,7 +30,9 @@ const RestaurantCard = (props) => {
     e.stopPropagation();
     setIsFavorite(!isFavorite);
   };
-  return (
+
+
+  return isLoading || restaurantData===0 ? <ShimmerCard /> :  (
     <div className="res-card">
       <div className="res-img-container">
         {image && <img src={image} alt={name} className="res-img" loading="lazy" />}

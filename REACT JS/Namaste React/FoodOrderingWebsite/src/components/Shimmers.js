@@ -14,6 +14,7 @@ export const ShimmerCard = () => {
         <div className="shimmer-rating-row">
           <div className="shimmer-rating-pill skeleton-pulse"></div>
           <div className="shimmer-rating-count skeleton-pulse"></div>
+          <div className="shimmer-delivery skeleton-pulse"></div>
         </div>
 
         <div className="shimmer-footer">
@@ -26,6 +27,10 @@ export const ShimmerCard = () => {
 };
 
 const Shimmers = ({ count = 8 }) => {
+  const shimmerCount = Number.isFinite(Number(count))
+    ? Math.max(0, Math.floor(Number(count)))
+    : 8;
+
   return (
     <div
       className="shimmer-wrapper"
@@ -34,11 +39,11 @@ const Shimmers = ({ count = 8 }) => {
       aria-busy="true"
       aria-label="Loading restaurants"
     >
-      {Array.from({ length: count }).map((_, index) => (
+      {Array.from({ length: shimmerCount }).map((_, index) => (
         <ShimmerCard key={`shimmer-${index}`} />
       ))}
     </div>
   );
 };
 
-export default Shimmers;
+export default Shimmers;
