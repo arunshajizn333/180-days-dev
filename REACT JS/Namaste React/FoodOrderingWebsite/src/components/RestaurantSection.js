@@ -2,14 +2,15 @@ import { useEffect, useState } from "react";
 import RestaurantCard from "./RestaurantCard.js";
 import { ShimmerCard } from "./Shimmers.js";
 
-const RestaurantSection = () => {
+const RestaurantSection = (props) => {
+  const { searchTerm } = props;
+
   const [restaurantList, setRestaurantList] = useState([]);
   const [resList, setResList] = useState([]);
 
   const [isLoading, setIsLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState("all");
   const [fetchError, setFetchError] = useState("");
-
 
   const fetchdata = async () => {
     const shimmerStartedAt = Date.now();
@@ -20,7 +21,7 @@ const RestaurantSection = () => {
 
     try {
       const response = await fetch(
-        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9352403&lng=77.624532&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9352403&lng=77.624532&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING",
       );
 
       if (!response.ok) {
@@ -37,15 +38,17 @@ const RestaurantSection = () => {
       setFetchError(error.message);
     } finally {
       const elapsed = Date.now() - shimmerStartedAt;
-      const remainingShimmerTime = Math.max(0, minimumShimmerDuration - elapsed);
+      const remainingShimmerTime = Math.max(
+        0,
+        minimumShimmerDuration - elapsed,
+      );
 
       await new Promise((resolve) => setTimeout(resolve, remainingShimmerTime));
       setIsLoading(false);
     }
   };
 
-
-
+ 
 
   useEffect(() => {
     fetchdata();
@@ -70,7 +73,7 @@ const RestaurantSection = () => {
   const handleFilterDelivery = () => {
     setActiveFilter("delivery");
     const sorted = [...restaurantList].sort(
-      (a, b) => a.info.sla.deliveryTime - b.info.sla.deliveryTime
+      (a, b) => a.info.sla.deliveryTime - b.info.sla.deliveryTime,
     );
     setResList(sorted);
   };
@@ -162,9 +165,15 @@ const RestaurantSection = () => {
             </button>
           </div>
         ) : (
-          resList.map((res) => (
-            <RestaurantCard key={res.info.id} restaurantData={res} />
-          ))
+          resList
+            .filter((res) =>
+              res.info.name
+                .toLowerCase()
+                .includes(searchTerm.trim().toLowerCase()),
+            )
+            .map((res) => (
+              <RestaurantCard key={res.info.id} restaurantData={res} />
+            ))
         )}
       </div>
     </section>

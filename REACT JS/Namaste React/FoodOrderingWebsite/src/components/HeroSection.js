@@ -1,4 +1,11 @@
-const HeroSection = () => (
+import {useState} from 'react';
+
+const HeroSection = (props) => {
+  const { setSearchTerm } = props;
+  const [inputValue, setInputValue] = useState("");
+
+
+  return (  
   <div className="hero-section">
     <p>Delicious Food, Delivered</p>
     <h1>
@@ -10,9 +17,19 @@ const HeroSection = () => (
       type="text"
       placeholder="Search for restaurants or dishes"
       className="search-input"
+      value={inputValue}
+      onChange={(e) => setInputValue(e.target.value)}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter') {
+         
+          setSearchTerm(inputValue);
+        }
+      }}
     />
     <p>Popular searches: Pizza, Burger, Pasta</p>
   </div>
-);
+  )
+};
+
 
 export default HeroSection
