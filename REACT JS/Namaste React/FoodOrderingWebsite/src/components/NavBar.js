@@ -1,11 +1,28 @@
+import { useState } from "react";
 
 import logo from "url:../assets/logo2.png";
 import locationIcon from "url:../assets/location.png";
 import profileIcon from "url:../assets/profile.png";
 import cartIcon from "url:../assets/cart.png";
+import exitIcon from "url:../assets/exit.png";
 
 
-const NavBar = () => (
+const NavBar = () => {
+  let LoginObj = {
+    btName: "Login / Sign Up",
+    iconLink: profileIcon,
+  };
+
+  let LogoutObj = {
+    btName: "Logout",
+    iconLink: exitIcon,
+  };
+
+
+  const [btnName, setBtnName] = useState(LoginObj);
+
+
+  return (  
   <header className="navbar-wrapper">
     <div className="navbar">
       <div className="logo">
@@ -33,8 +50,15 @@ const NavBar = () => (
         </div>
 
         <div className="profile">
-          <img alt="Profile" src={profileIcon} className="profile-img" />
-          <h4 className="profile-heading">Login / Sign Up</h4>
+          <img alt="Profile" src={btnName.iconLink} className="profile-img" onClick={() =>
+          btnName.btName === "Login / Sign Up" ? setBtnName( LogoutObj ) : setBtnName(LoginObj)}
+              />
+
+          <button className="profile-btn" onClick={() =>
+          btnName.btName === "Login / Sign Up" ? setBtnName( LogoutObj ) : setBtnName(LoginObj)}
+             >
+            {btnName.btName}
+          </button>
         </div>
 
         <div className="cart">
@@ -44,6 +68,7 @@ const NavBar = () => (
       </div>
     </div>
   </header>
-);
+  )
+};
 
 export default NavBar;

@@ -170,7 +170,8 @@ body {
 }
 
 .profile:hover {
-  background-color: #f7f8fa;
+
+  background-color: #b3b5b9;
 }
 
 .profile-img {
@@ -180,11 +181,14 @@ body {
   border-radius: 50%;
 }
 
-.profile-heading {
+.profile-btn {
   font-size: 14px;
   font-weight: 700;
   color: var(--text-main);
   white-space: nowrap;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 .cart {
