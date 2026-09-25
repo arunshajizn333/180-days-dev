@@ -31,3 +31,19 @@ Upcomming Steps :
 -Tailwind CSS and how to use it to style React components
 -Material UI and how to use it to create beautiful and responsive user interfaces in React
 -
+
+
+Swiggy restaurant listing uses paginated API requests.
+
+Initial endpoint:
+GET /dapi/restaurants/list/v5
+
+Next-batch endpoint:
+POST /dapi/restaurants/list/update
+
+The first response provides pagination data such as:
+- nextOffset
+- widgetOffset
+
+The next request uses that pagination state to fetch another batch
+of restaurants instead of loading everything at once.
