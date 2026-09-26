@@ -5,7 +5,7 @@ import locationIcon from "url:../assets/location.png";
 import profileIcon from "url:../assets/profile.png";
 import cartIcon from "url:../assets/cart.png";
 import exitIcon from "url:../assets/exit.png";
-
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   let LoginObj = {
@@ -18,57 +18,67 @@ const NavBar = () => {
     iconLink: exitIcon,
   };
 
-
   const [btnName, setBtnName] = useState(LoginObj);
 
+  return (
+    <header className="navbar-wrapper">
+      <div className="navbar">
+        <div className="logo">
+          <img alt="Foodie Logo" src={logo} className="logo-img" />
+        </div>
+ 
+        <nav className="nav-links-container">
+          <ul className="nav-links">
+            <li className="nav-link active"><Link to="/">Home</Link></li>
+            <li className="nav-link">Restaurants</li>
+            <li className="nav-link"><Link to="/contact">Contact</Link></li>
+            <li className="nav-link"><Link to="/about">About</Link></li>
+          </ul>
+        </nav>
 
-  return (  
-  <header className="navbar-wrapper">
-    <div className="navbar">
-      <div className="logo">
-        <img alt="Foodie Logo" src={logo} className="logo-img" />
-      </div>
+        <div className="nav-actions">
+          <div className="location">
+            <img alt="Location" src={locationIcon} className="location-icon" />
+            <div className="location-info">
+              <span className="location-text">Deliver to</span>
+              <span className="location-details">
+                Bengaluru, 560045 <span className="chevron-down">▼</span>
+              </span>
+            </div>
+          </div>
 
-      <nav className="nav-links-container">
-        <ul className="nav-links">
-          <li className="nav-link active">Home</li>
-          <li className="nav-link">Restaurants</li>
-          <li className="nav-link">Offers</li>
-          <li className="nav-link">About</li>
-        </ul>
-      </nav>
+          <div className="profile">
+            <img
+              alt="Profile"
+              src={btnName.iconLink}
+              className="profile-img"
+              onClick={() =>
+                btnName.btName === "Login / Sign Up"
+                  ? setBtnName(LogoutObj)
+                  : setBtnName(LoginObj)
+              }
+            />
 
-      <div className="nav-actions">
-        <div className="location">
-          <img alt="Location" src={locationIcon} className="location-icon" />
-          <div className="location-info">
-            <span className="location-text">Deliver to</span>
-            <span className="location-details">
-              Bengaluru, 560045 <span className="chevron-down">▼</span>
-            </span>
+            <button
+              className="profile-btn"
+              onClick={() =>
+                btnName.btName === "Login / Sign Up"
+                  ? setBtnName(LogoutObj)
+                  : setBtnName(LoginObj)
+              }
+            >
+              {btnName.btName}
+            </button>
+          </div>
+
+          <div className="cart">
+            <img alt="Cart" src={cartIcon} className="cart-icon" />
+            <span className="cart-badge">0</span>
           </div>
         </div>
-
-        <div className="profile">
-          <img alt="Profile" src={btnName.iconLink} className="profile-img" onClick={() =>
-          btnName.btName === "Login / Sign Up" ? setBtnName( LogoutObj ) : setBtnName(LoginObj)}
-              />
-
-          <button className="profile-btn" onClick={() =>
-          btnName.btName === "Login / Sign Up" ? setBtnName( LogoutObj ) : setBtnName(LoginObj)}
-             >
-            {btnName.btName}
-          </button>
-        </div>
-
-        <div className="cart">
-          <img alt="Cart" src={cartIcon} className="cart-icon" />
-          <span className="cart-badge">0</span>
-        </div>
       </div>
-    </div>
-  </header>
-  )
+    </header>
+  );
 };
 
 export default NavBar;
