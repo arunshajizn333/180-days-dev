@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import RestaurantCard from "./RestaurantCard.js";
 import { ShimmerCard } from "./Shimmers.js";
+import { CORS_FIX, ResApiCards } from "../utils/constants.js";
 
 const RestaurantSection = (props) => {
   const { searchTerm } = props;
@@ -21,9 +22,9 @@ const RestaurantSection = (props) => {
 
     try {
       const response = await fetch(
+        CORS_FIX + ResApiCards
         
-        "https://proxy.corsfix.com/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9352403&lng=77.624532&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTINGhttps://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9352403&lng=77.624532&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTINGhttps://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9352403&lng=77.624532&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING",
-      );
+      )
 
       if (!response.ok) {
         throw new Error("Unable to load restaurants.");

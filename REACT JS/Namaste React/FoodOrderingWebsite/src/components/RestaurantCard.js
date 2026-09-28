@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ShimmerCard ,Shimmers} from "./Shimmers.js";
+import { IMAGE_URL } from "../utils/constants.js";
 
 const RestaurantCard = (props) => {
   const { restaurantData, isLoading } = props;
@@ -21,7 +22,7 @@ const RestaurantCard = (props) => {
   } = restaurantData.info;
 
   const image = cloudinaryImageId
-    ? `https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/${cloudinaryImageId}`
+    ? `${IMAGE_URL}${cloudinaryImageId}`
     : "";
   const cuisineList = cuisines?.join(", ") || "";
   const deliveryLabel = slaString || (deliveryTime ? `${deliveryTime} min` : "Delivery time unavailable");

@@ -11,6 +11,7 @@ import { RouterProvider, createBrowserRouter, Outlet } from "react-router-dom";
 import About from "./components/pages/About.js";
 import Error from "./components/pages/Error.js";
 import Contact from "./components/pages/Contact.js";
+import ResMenuPage from "./components/pages/ResMenuPage.js";
 
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -50,6 +51,11 @@ const router = createBrowserRouter([
         path: "/contact",
         element: <Contact />,
       },
+      {
+        path: "/restaurentMenu/:id",
+        element: <ResMenuPage />,
+      },
+
     ],
     errorElement: <Error />,
   },
