@@ -1,0 +1,257 @@
+{
+  "statusCode": 0,
+  "data": {
+    "statusMsg": "Success",
+    "success": true,
+    "cards": [
+      {
+        "card": {
+          "card": {
+            "refreshTitle": "Good Food, More Often",
+            "restaurantId": "161720",
+            "restaurantSlug": "red-hot-bbq-grill-mallathahalli-nagarbhavi",
+            "restaurantName": "Red Hot BBQ Grill",
+            "type": "restaurant_details",
+            "avgRatingString": "4.4",
+            "totalRatingsString": "500+",
+            "costForTwoMessage": "₹ 500 for two",
+            "info": {
+              "resId": 161720,
+              "name": "Red Hot BBQ Grill",
+              "city": "10968",
+              "streetAddress": "No. 478/4, 13th Cross, Outer Ring Road, Mallathahalli NagarBhavi",
+              "locality": "Mallathahalli NagarBhavi",
+              "areaName": "West Bangalore",
+              "pinCode": "560056",
+              "cloudinaryImageId": "nys0vj29r99v348ggr5j",
+              "cuisines": ["BBQ", "Korean", "Chinese", "Rolls", "North Indian", "Biryani"],
+              "veg": false,
+              "costForTwoMessage": "₹500 for two",
+              "avgRating": 4.4,
+              "totalRatings": 500,
+              "totalRatingsString": "500+ ratings",
+              "sla": {
+                "deliveryTime": 35,
+                "slaString": "30-35 mins"
+              },
+              "availability": {
+                "opened": true
+              },
+              "isOpen": true,
+              "localityVerbose": "Mallathahalli NagarBhavi, Bangalore"
+            }
+          }
+        }
+      },
+      {
+        "groupedCard": {
+          "cardGroupMap": {
+            "REGULAR": {
+              "cards": [
+                {
+                  "card": {
+                    "card": {
+                      "title": "Recommended",
+                      "itemCards": [
+                        {
+                          "card": {
+                            "info": {
+                              "id": "101001",
+                              "name": "BBQ Chicken Wings",
+                              "category": "Starters",
+                              "description": "Juicy chicken wings marinated in smoky BBQ sauce, grilled to perfection",
+                              "imageId": "rng/md/carousel/production/pneknawbadtvceqzwiep",
+                              "isVeg": 0,
+                              "price": 29900,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.5",
+                                  "ratingCount": "120 ratings"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "101002",
+                              "name": "Paneer Tikka",
+                              "category": "Starters",
+                              "description": "Soft paneer cubes marinated in spiced yogurt and char-grilled in tandoor",
+                              "imageId": "rng/md/carousel/production/pneknawbadtvceqzwiep",
+                              "isVeg": 1,
+                              "price": 24900,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.3",
+                                  "ratingCount": "95 ratings"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "101003",
+                              "name": "Korean Fried Chicken",
+                              "category": "Starters",
+                              "description": "Crispy double-fried chicken tossed in sweet and spicy gochujang sauce",
+                              "imageId": "rng/md/carousel/production/pneknawbadtvceqzwiep",
+                              "isVeg": 0,
+                              "price": 34900,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.6",
+                                  "ratingCount": "200 ratings"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "101004",
+                              "name": "Chicken Biryani",
+                              "category": "Biryani",
+                              "description": "Fragrant basmati rice layered with tender chicken pieces and aromatic spices",
+                              "imageId": "rng/md/carousel/production/pneknawbadtvceqzwiep",
+                              "isVeg": 0,
+                              "price": 27900,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.4",
+                                  "ratingCount": "350 ratings"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "101005",
+                              "name": "Veg Fried Rice",
+                              "category": "Rice",
+                              "description": "Wok-tossed rice with fresh vegetables and soy sauce",
+                              "imageId": "rng/md/carousel/production/pneknawbadtvceqzwiep",
+                              "isVeg": 1,
+                              "price": 19900,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.2",
+                                  "ratingCount": "85 ratings"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "101006",
+                              "name": "Chicken Roll",
+                              "category": "Rolls",
+                              "description": "Grilled chicken strips with onions, chutney, and fresh veggies wrapped in a flaky paratha",
+                              "imageId": "rng/md/carousel/production/pneknawbadtvceqzwiep",
+                              "isVeg": 0,
+                              "price": 15900,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.1",
+                                  "ratingCount": "180 ratings"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "101007",
+                              "name": "Butter Naan",
+                              "category": "Breads",
+                              "description": "Soft leavened bread baked in clay oven, brushed with butter",
+                              "imageId": "rng/md/carousel/production/pneknawbadtvceqzwiep",
+                              "isVeg": 1,
+                              "price": 5900,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.0",
+                                  "ratingCount": "60 ratings"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "101008",
+                              "name": "Dal Makhani",
+                              "category": "Main Course",
+                              "description": "Slow-cooked black lentils simmered in creamy tomato gravy with butter",
+                              "imageId": "rng/md/carousel/production/pneknawbadtvceqzwiep",
+                              "isVeg": 1,
+                              "price": 22900,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.5",
+                                  "ratingCount": "140 ratings"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "101009",
+                              "name": "BBQ Lamb Chops",
+                              "category": "BBQ Specials",
+                              "description": "Tender lamb chops marinated overnight and slow-grilled with house BBQ glaze",
+                              "imageId": "rng/md/carousel/production/pneknawbadtvceqzwiep",
+                              "isVeg": 0,
+                              "price": 49900,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.7",
+                                  "ratingCount": "90 ratings"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "101010",
+                              "name": "Gulab Jamun",
+                              "category": "Desserts",
+                              "description": "Soft milk dumplings soaked in rose-flavored sugar syrup",
+                              "imageId": "rng/md/carousel/production/pneknawbadtvceqzwiep",
+                              "isVeg": 1,
+                              "price": 9900,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.3",
+                                  "ratingCount": "75 ratings"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    ]
+  }
+}

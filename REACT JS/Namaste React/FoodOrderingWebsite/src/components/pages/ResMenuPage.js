@@ -2,20 +2,24 @@ import { useEffect, useState } from "react";
 import { CORS_FIX, MENU_API } from "../../utils/constants.js";
 
 const ResMenuPage = () => {
-  const menuData = async () => {
-    try {
-      const response = await fetch("https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9352403&lng=77.624532&restaurantId=23678&catalog_qa=undefined&submitAction=ENTER");
-      const body = await response.text();
-      console.log("Status:", response.status);
-      console.log("Content-Type:", response.headers.get("content-type"));
-      console.log("Body:", body);
-    } catch (error) {
-      console.log("Original error:", error.name, error.message);
-    }
-  };
 
+  const fetchMenu = async () => {
+  try {
+    // Calls your Node backend on port 5000
+    const response = await fetch("http://localhost:5000/api/menu/23678");
+
+    // Line 12 will succeed because your backend sends real JSON!
+    const json = await response.json();
+    console.log("Real-time Swiggy Data via Backend:", json);
+
+   
+  } catch (error) {
+    console.error("Error fetching Swiggy menu:", error);
+  }
+};
+  
   useEffect(() => {
-    menuData();
+    fetchMenu();
   }, []);
 
   return (

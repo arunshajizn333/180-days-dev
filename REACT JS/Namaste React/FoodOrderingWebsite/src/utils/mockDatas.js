@@ -172,4 +172,5 @@ const CATEGORIES = [
 
 
 
+
 module.exports = { RESTAURANTS, CATEGORIES };
