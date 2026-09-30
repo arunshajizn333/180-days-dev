@@ -22,15 +22,6 @@ and how to create dynamic web applications.
  
 
 
-Upcomming Steps :
--Do A COmplete react project from scratch
--Learn about React Router and how to create a multi-page application
--Learn about Redux and how to manage global state in a React application
--Learn about testing in React and how to write unit tests for components
--Learn about performance optimization techniques in React and how to improve the performance of a React application
--Tailwind CSS and how to use it to style React components
--Material UI and how to use it to create beautiful and responsive user interfaces in React
--
 
 
 Swiggy restaurant listing uses paginated API requests.
@@ -47,3 +38,38 @@ The first response provides pagination data such as:
 
 The next request uses that pagination state to fetch another batch
 of restaurants instead of loading everything at once.
+
+
+React App (localhost:1234)
+    │
+    │  fetch("http://localhost:5000/api/menu/23678")
+    ▼
+Express Server (localhost:5000)          ← receives the request
+    │
+    │  STEP 1: getPage() → Puppeteer opens hidden Chrome → visits swiggy.com
+    │           Chrome solves AWS WAF challenge → gets cookies
+    │
+    │  STEP 2: page.evaluate() → runs fetch() INSIDE Chrome
+    │           Same-origin request → no CORS → gets live JSON
+    │
+    │  STEP 3: res.json(data) → sends JSON back to React
+    ▼
+React App
+    │
+    │  const json = await response.json()
+    │  setResInfo(json?.data)
+    ▼
+  UI Renders: Restaurant name, cuisines, menu items
+
+
+
+
+  Upcomming Steps :
+-Do A COmplete react project from scratch
+-Learn about React Router and how to create a multi-page application
+-Learn about Redux and how to manage global state in a React application
+-Learn about testing in React and how to write unit tests for components
+-Learn about performance optimization techniques in React and how to improve the performance of a React application
+-Tailwind CSS and how to use it to style React components
+-Material UI and how to use it to create beautiful and responsive user interfaces in React
+-

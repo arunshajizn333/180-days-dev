@@ -6,6 +6,8 @@ import NavBar from "./components/NavBar";
 import HeroSection from "./components/HeroSection.js";
 import CategorySection from "./components/CategorySection.js";
 import RestaurantSection from "./components/RestaurantSection.js";
+import PromoBanner from "./components/PromoBanner.js";
+import Footer from "./components/Footer.js";
 
 import { RouterProvider, createBrowserRouter, Outlet } from "react-router-dom";
 import About from "./components/pages/About.js";
@@ -15,12 +17,26 @@ import ResMenuPage from "./components/pages/ResMenuPage.js";
 
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("all");
+
+  const handleCategorySelect = (catId, catName) => {
+    setSelectedCategory(catId);
+    if (catId === "all" || catId === "more") {
+      setSearchTerm("");
+    } else {
+      setSearchTerm(catName);
+    }
+  };
 
   return (
-    <div className="app-container">
-      <HeroSection  setSearchTerm={setSearchTerm} />
-      <CategorySection />
+    <div className="home-content">
+      <HeroSection setSearchTerm={setSearchTerm} />
+      <CategorySection
+        selectedCategory={selectedCategory}
+        onSelectCategory={handleCategorySelect}
+      />
       <RestaurantSection searchTerm={searchTerm} />
+      <PromoBanner />
     </div>
   );
 };
@@ -30,6 +46,7 @@ const App = () => {
     <div className="app-container">
       <NavBar />
       <Outlet />
+      <Footer />
     </div>
   );
 };
@@ -52,10 +69,9 @@ const router = createBrowserRouter([
         element: <Contact />,
       },
       {
-        path: "/restaurentMenu/:id",
+        path: "/restaurentMenu/:resId",
         element: <ResMenuPage />,
       },
-
     ],
     errorElement: <Error />,
   },

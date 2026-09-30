@@ -2,15 +2,12 @@ import { useEffect, useState } from "react";
 import RestaurantCard from "./RestaurantCard.js";
 import { ShimmerCard } from "./Shimmers.js";
 import { CORS_FIX, ResApiCards } from "../utils/constants.js";
+import { Link } from "react-router-dom";
 
-const RestaurantSection = (props) => {
-  const { searchTerm } = props;
-
+const RestaurantSection = ({ searchTerm = "" }) => {
   const [restaurantList, setRestaurantList] = useState([]);
   const [resList, setResList] = useState([]);
-
   const [isLoading, setIsLoading] = useState(true);
-  const [activeFilter, setActiveFilter] = useState("all");
   const [fetchError, setFetchError] = useState("");
 
   const fetchdata = async () => {
@@ -21,10 +18,7 @@ const RestaurantSection = (props) => {
     setFetchError("");
 
     try {
-      const response = await fetch(
-        CORS_FIX + ResApiCards
-        
-      )
+      const response = await fetch(CORS_FIX + ResApiCards);
 
       if (!response.ok) {
         throw new Error("Unable to load restaurants.");
@@ -32,7 +26,9 @@ const RestaurantSection = (props) => {
 
       const json = await response.json();
       const restaurants =
-        json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants;
+        json?.data?.cards?.[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants ||
+        json?.data?.cards?.[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants ||
+        [];
 
       setRestaurantList(restaurants);
       setResList(restaurants);
@@ -40,142 +36,58 @@ const RestaurantSection = (props) => {
       setFetchError(error.message);
     } finally {
       const elapsed = Date.now() - shimmerStartedAt;
-      const remainingShimmerTime = Math.max(
-        0,
-        minimumShimmerDuration - elapsed,
-      );
+      const remainingShimmerTime = Math.max(0, minimumShimmerDuration - elapsed);
 
       await new Promise((resolve) => setTimeout(resolve, remainingShimmerTime));
       setIsLoading(false);
     }
   };
 
- 
-
   useEffect(() => {
     fetchdata();
   }, []);
 
-  const handleFilterAll = () => {
-    setActiveFilter("all");
-    setFetchError("");
-    setResList(restaurantList);
-  };
-
-  const handleFilterRating = () => {
-    setActiveFilter("rating");
-    setResList(restaurantList.filter((r) => Number(r.info.avgRating) >= 4.0));
-  };
-
-  const handleFilterVeg = () => {
-    setActiveFilter("veg");
-    setResList(restaurantList.filter((r) => r.info.veg));
-  };
-
-  const handleFilterDelivery = () => {
-    setActiveFilter("delivery");
-    const sorted = [...restaurantList].sort(
-      (a, b) => a.info.sla.deliveryTime - b.info.sla.deliveryTime,
+  const filteredRestaurants = resList.filter((res) => {
+    if (!searchTerm || !searchTerm.trim()) return true;
+    const term = searchTerm.toLowerCase().trim();
+    const nameMatch = res?.info?.name?.toLowerCase().includes(term);
+    const cuisineMatch = res?.info?.cuisines?.some((c) =>
+      c.toLowerCase().includes(term)
     );
-    setResList(sorted);
-  };
-
-  const handleReload = () => {
-    setIsLoading(true);
-    setActiveFilter("all");
-    setTimeout(() => {
-      setResList(restaurantList);
-      setIsLoading(false);
-    }, 1500);
-  };
+    return nameMatch || cuisineMatch;
+  });
 
   return (
-    <section className="res-section">
+    <section className="res-section" aria-label="Popular Restaurants">
       <div className="res-header">
-        <div className="res-header-left">
-          <h2 className="res-title">Popular Restaurants</h2>
-          <span className="res-count-badge">
-            {isLoading ? "Loading..." : `${resList.length} places`}
-          </span>
-        </div>
+        <h2 className="res-title">Popular Restaurants</h2>
 
-        <div className="res-header-actions">
-          <button
-            className="reload-shimmer-btn"
-            onClick={handleReload}
-            title="Reload to see Shimmer effect"
-            aria-label="Reload shimmer"
-          >
-            ↻ Reload Shimmer
-          </button>
-          <a href="#all" className="see-all-link">
-            See All <span>→</span>
-          </a>
-        </div>
+        <a href="#all" className="see-all-link">
+          See All <span className="see-all-arrow">→</span>
+        </a>
       </div>
 
-      <div className="res-filter">
-        {fetchError && <p className="res-error">{fetchError}</p>}
-
-        {/* All */}
-        <button
-          className={`filter-btn ${activeFilter === "all" ? "active" : ""}`}
-          onClick={handleFilterAll}
-          disabled={isLoading}
-        >
-          All
-        </button>
-
-        {/* Rating 4.0+ */}
-        <button
-          className={`filter-btn ${activeFilter === "rating" ? "active" : ""}`}
-          onClick={handleFilterRating}
-          disabled={isLoading}
-        >
-          ★ Rating 4.0+
-        </button>
-
-        {/* Pure Veg */}
-        <button
-          className={`filter-btn ${activeFilter === "veg" ? "active" : ""}`}
-          onClick={handleFilterVeg}
-          disabled={isLoading}
-        >
-          🌱 Pure Veg
-        </button>
-
-        {/* Delivery Time */}
-        <button
-          className={`filter-btn ${activeFilter === "delivery" ? "active" : ""}`}
-          onClick={handleFilterDelivery}
-          disabled={isLoading}
-        >
-          ⚡ Fast Delivery
-        </button>
-      </div>
+      {fetchError && <p className="res-error">{fetchError}</p>}
 
       <div className="res-grid" role="region" aria-label="Restaurant list">
         {isLoading ? (
           Array.from({ length: 8 }).map((_, index) => (
             <ShimmerCard key={`shimmer-card-${index}`} />
           ))
-        ) : resList.length === 0 ? (
+        ) : filteredRestaurants.length === 0 ? (
           <div className="no-res-found">
-            <p>No restaurants found matching this filter.</p>
-            <button className="filter-btn active" onClick={handleFilterAll}>
-              Show All Restaurants
-            </button>
+            <p>No restaurants found matching &quot;{searchTerm}&quot;.</p>
           </div>
         ) : (
-          resList
-            .filter((res) =>
-              res.info.name
-                .toLowerCase()
-                .includes(searchTerm.trim().toLowerCase()),
-            )
-            .map((res) => (
-              <RestaurantCard key={res.info.id} restaurantData={res} />
-            ))
+          filteredRestaurants.map((res) => (
+            <Link
+              to={`/restaurentMenu/${res.info.id}`}
+              key={res.info.id}
+              className="res-card-link"
+            >
+              <RestaurantCard restaurantData={res} />
+            </Link>
+          ))
         )}
       </div>
     </section>

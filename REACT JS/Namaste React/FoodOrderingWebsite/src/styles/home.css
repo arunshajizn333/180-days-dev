@@ -1,0 +1,750 @@
+/* ===================================================
+   HOME PAGE STYLES (TargetDesign.png)
+   =================================================== */
+
+/* ===================================================
+   1. HERO SECTION
+   =================================================== */
+
+.hero-section {
+  max-width: 1240px;
+  margin: 16px auto 0;
+  min-height: 280px;
+  padding: 40px 48px;
+  border-radius: 24px;
+  background-color: #fdf5ec;
+  background-image: url("../assets/hero-background.png");
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: contain;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.hero-eyebrow {
+  margin: 0 0 10px 0;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #8c827a;
+}
+
+.hero-title {
+  margin: 0;
+  font-size: 44px;
+  line-height: 1.15;
+  font-weight: 800;
+  color: #1a1a1a;
+  letter-spacing: -0.8px;
+  max-width: 520px;
+}
+
+.hero-title span {
+  color: var(--primary);
+}
+
+.hero-subtitle {
+  margin: 12px 0 22px 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #555555;
+}
+
+/* Search Container with Icon & Action Button */
+.hero-search-wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  height: 54px;
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  padding: 4px 6px 4px 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  transition: all 0.2s ease;
+  gap: 12px;
+  box-sizing: border-box;
+}
+
+.hero-search-wrapper:focus-within {
+  border-color: var(--primary);
+  box-shadow: 0 6px 24px rgba(255, 82, 0, 0.16);
+}
+
+.hero-search-icon {
+  font-size: 18px;
+  color: #727782;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.search-input {
+  flex: 1;
+  height: 100%;
+  border: none;
+  background: transparent;
+  font-size: 14.5px;
+  font-family: inherit;
+  color: #222222;
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: #9aa0a6;
+}
+
+.hero-search-btn {
+  background-color: var(--primary);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 0 22px;
+  height: 42px;
+  border-radius: 10px;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+  flex-shrink: 0;
+}
+
+.hero-search-btn:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+/* Popular Searches Pills */
+.hero-popular-searches {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.popular-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.popular-pill {
+  font-size: 12px;
+  font-weight: 600;
+  color: #525866;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  padding: 4px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.popular-pill:hover {
+  background-color: #fff4ed;
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: translateY(-1px);
+}
+
+/* ===================================================
+   2. CATEGORY SECTION
+   =================================================== */
+
+.category-section {
+  width: 100%;
+  background-color: #f8f8f6;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 24px 0 12px;
+}
+
+.category-list {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  box-sizing: border-box;
+}
+
+.category-list::-webkit-scrollbar {
+  display: none;
+}
+
+.category-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  min-width: 78px;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  transition: transform 0.18s ease;
+}
+
+.category-item:hover {
+  transform: translateY(-2px);
+}
+
+.category-circle {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.category-icon {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.category-name {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #374151;
+  margin-top: 10px;
+  white-space: nowrap;
+  letter-spacing: -0.2px;
+  transition: color 0.15s ease;
+}
+
+.category-indicator {
+  height: 3px;
+  width: 0;
+  border-radius: 99px;
+  background-color: var(--primary);
+  margin-top: 6px;
+  transition: width 0.2s ease, opacity 0.2s ease;
+  opacity: 0;
+}
+
+.category-radio {
+  display: none;
+}
+
+.category-radio:checked~.category-circle {
+  box-shadow: 0 6px 18px rgba(255, 82, 0, 0.18);
+  transform: scale(1.04);
+}
+
+.category-radio:checked~.category-circle .category-icon {
+  color: var(--primary);
+}
+
+.category-radio:checked~.category-name {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.category-radio:checked~.category-indicator {
+  width: 32px;
+  opacity: 1;
+}
+
+/* ===================================================
+   3. POPULAR RESTAURANTS SECTION & CARDS (TargetDesign)
+   =================================================== */
+
+.res-section {
+  max-width: 1240px;
+  margin: 36px auto 10px;
+  padding: 0 24px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.res-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.res-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: #1a1a1a;
+  letter-spacing: -0.4px;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.see-all-link {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--primary) !important;
+  text-decoration: none !important;
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: transform 0.18s ease, color 0.18s ease;
+}
+
+.see-all-link:hover {
+  color: var(--primary-hover) !important;
+  transform: translateX(4px);
+}
+
+.see-all-arrow {
+  font-size: 17px;
+  line-height: 1;
+}
+
+.res-error {
+  color: #e53935;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+/* 4-Column Equal Size Grid */
+.res-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  width: 100%;
+  box-sizing: border-box;
+  align-items: stretch;
+}
+
+/* Card Link Container */
+.res-card-link {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  /* Prevents overflow inside grid */
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.res-card-link:hover,
+.res-card-link:focus,
+.res-card-link:visited,
+.res-card-link:active {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Restaurant Card */
+.res-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #f0f0f2;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: transform 0.22s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeInCard 0.35s ease-out;
+}
+
+@keyframes fadeInCard {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.res-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.09);
+}
+
+/* Image Wrapper with Heart and Delivery Badge */
+.res-img-container {
+  position: relative;
+  width: 100%;
+  height: 190px;
+  overflow: hidden;
+  background-color: #f1f2f4;
+  flex-shrink: 0;
+}
+
+.res-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.res-card:hover .res-img {
+  transform: scale(1.05);
+}
+
+/* Heart Icon (Top Right) */
+.heart-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.45);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: background 0.15s ease, transform 0.15s ease;
+  z-index: 2;
+  padding: 0;
+}
+
+.heart-btn:hover {
+  background: rgba(0, 0, 0, 0.65);
+  transform: scale(1.1);
+}
+
+.heart-btn.favorited {
+  background: rgba(255, 255, 255, 0.9);
+  transform: scale(1.05);
+}
+
+/* Delivery Badge on Image (Bottom Right) */
+.delivery-badge {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(18, 18, 18, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: #ffffff;
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  z-index: 2;
+  letter-spacing: -0.2px;
+}
+
+.delivery-badge .clock-icon {
+  font-size: 11px;
+}
+
+/* Details Section (Uniform & Pixel-Perfect) */
+.res-info {
+  padding: 16px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  box-sizing: border-box;
+}
+
+/* Restaurant Name */
+.res-name {
+  font-size: 17.5px;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin-bottom: 4px;
+  height: 22px;
+  line-height: 22px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Cuisines */
+.res-cuisines {
+  font-size: 13.5px;
+  color: #727782;
+  font-weight: 500;
+  margin-bottom: 12px;
+  height: 18px;
+  line-height: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Rating Row */
+.res-rating-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 14px;
+  height: 22px;
+  white-space: nowrap;
+}
+
+.star-icon {
+  color: #ff9f00;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.rating-score {
+  font-size: 14px;
+  font-weight: 800;
+  color: #1a1a1a;
+  line-height: 1;
+}
+
+.rating-count {
+  font-size: 13px;
+  color: #7b8089;
+  font-weight: 500;
+  line-height: 1;
+}
+
+/* Footer: Price + Free Delivery Tag */
+.res-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px dashed #eceef2;
+  padding-top: 12px;
+  margin-top: auto;
+  min-height: 38px;
+}
+
+.price-text {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #3b404a;
+  white-space: nowrap;
+}
+
+.free-delivery-badge {
+  font-size: 11px;
+  font-weight: 700;
+  color: #0b9e59;
+  background-color: #eafaf1;
+  border: 1px solid rgba(11, 158, 89, 0.15);
+  padding: 4px 10px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+/* Empty State */
+.no-res-found {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 20px;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px dashed #e2e4e8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.no-res-found p {
+  font-size: 16px;
+  color: #6a717e;
+  font-weight: 500;
+}
+
+/* ===================================================
+   4. PROMO BANNER (TargetDesign.png)
+   =================================================== */
+
+.promo-banner {
+  max-width: 1240px;
+  margin: 36px auto 60px;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+.promo-banner-inner {
+  background: linear-gradient(90deg, #fff2eb 0%, #fde8db 60%, #fae1d0 100%);
+  border: 1px solid #ffd8c2;
+  border-radius: 20px;
+  padding: 28px 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(255, 82, 0, 0.06);
+}
+
+.promo-left {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  z-index: 2;
+}
+
+.promo-gift-icon {
+  font-size: 42px;
+  line-height: 1;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+}
+
+.promo-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.promo-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: #1a1a1a;
+  letter-spacing: -0.4px;
+}
+
+.promo-title .highlight {
+  color: #ff334b;
+}
+
+.promo-subtitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: #6c727e;
+}
+
+.promo-right {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  z-index: 2;
+}
+
+.promo-order-btn {
+  background: var(--primary);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 13px 32px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(255, 82, 0, 0.28);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.promo-order-btn:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(255, 82, 0, 0.35);
+}
+
+/* ===================================================
+   5. RESPONSIVE BREAKPOINTS (HOME)
+   =================================================== */
+
+@media (max-width: 1080px) {
+  .hero-section {
+    margin: 16px 16px 0;
+    padding: 36px 30px;
+    background-size: 45%;
+  }
+
+  .category-list {
+    justify-content: flex-start;
+    gap: 16px;
+  }
+
+  .res-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    background-image: none;
+    padding: 28px 20px;
+  }
+
+  .hero-title {
+    font-size: 34px;
+  }
+
+  .hero-search-wrapper {
+    max-width: 100%;
+    height: 50px;
+  }
+
+  .hero-search-btn {
+    padding: 0 16px;
+    height: 40px;
+    font-size: 13px;
+  }
+
+  .category-circle {
+    width: 60px;
+    height: 60px;
+  }
+
+  .category-icon {
+    font-size: 26px;
+  }
+
+  .res-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .promo-banner-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 24px 20px;
+  }
+
+  .promo-right {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .promo-order-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .res-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .res-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .hero-popular-searches {
+    display: none;
+  }
+}

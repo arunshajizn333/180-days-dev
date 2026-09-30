@@ -1,19 +1,21 @@
 import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 import logo from "url:../assets/logo2.png";
 import locationIcon from "url:../assets/location.png";
 import profileIcon from "url:../assets/profile.png";
 import cartIcon from "url:../assets/cart.png";
 import exitIcon from "url:../assets/exit.png";
-import { Link } from "react-router-dom";
 
 const NavBar = () => {
-  let LoginObj = {
+  const location = useLocation();
+
+  const LoginObj = {
     btName: "Login / Sign Up",
     iconLink: profileIcon,
   };
 
-  let LogoutObj = {
+  const LogoutObj = {
     btName: "Logout",
     iconLink: exitIcon,
   };
@@ -23,22 +25,30 @@ const NavBar = () => {
   return (
     <header className="navbar-wrapper">
       <div className="navbar">
-        <div className="logo">
+        <Link to="/" className="logo" aria-label="Foodie Home">
           <img alt="Foodie Logo" src={logo} className="logo-img" />
-        </div>
- 
-        <nav className="nav-links-container">
+        </Link>
+
+        <nav className="nav-links-container" aria-label="Main Navigation">
           <ul className="nav-links">
-            <li className="nav-link active"><Link to="/">Home</Link></li>
-            <li className="nav-link">Restaurants</li>
-            <li className="nav-link"><Link to="/contact">Contact</Link></li>
-            <li className="nav-link"><Link to="/about">About</Link></li>
+            <li className={`nav-link ${location.pathname === "/" ? "active" : ""}`}>
+              <Link to="/">Home</Link>
+            </li>
+            <li className="nav-link">
+              <Link to="/">Restaurants</Link>
+            </li>
+            <li className={`nav-link ${location.pathname === "/contact" ? "active" : ""}`}>
+              <Link to="/contact">Contact</Link>
+            </li>
+            <li className={`nav-link ${location.pathname === "/about" ? "active" : ""}`}>
+              <Link to="/about">About</Link>
+            </li>
           </ul>
         </nav>
 
         <div className="nav-actions">
-          <div className="location">
-            <img alt="Location" src={locationIcon} className="location-icon" />
+          <div className="location" title="Delivery Location">
+            <img alt="Location pin" src={locationIcon} className="location-icon" />
             <div className="location-info">
               <span className="location-text">Deliver to</span>
               <span className="location-details">
@@ -47,31 +57,25 @@ const NavBar = () => {
             </div>
           </div>
 
-          <div className="profile">
+          <div
+            className="profile"
+            onClick={() =>
+              btnName.btName === "Login / Sign Up"
+                ? setBtnName(LogoutObj)
+                : setBtnName(LoginObj)
+            }
+          >
             <img
               alt="Profile"
               src={btnName.iconLink}
               className="profile-img"
-              onClick={() =>
-                btnName.btName === "Login / Sign Up"
-                  ? setBtnName(LogoutObj)
-                  : setBtnName(LoginObj)
-              }
             />
-
-            <button
-              className="profile-btn"
-              onClick={() =>
-                btnName.btName === "Login / Sign Up"
-                  ? setBtnName(LogoutObj)
-                  : setBtnName(LoginObj)
-              }
-            >
+            <button className="profile-btn" type="button">
               {btnName.btName}
             </button>
           </div>
 
-          <div className="cart">
+          <div className="cart" aria-label="Shopping Cart">
             <img alt="Cart" src={cartIcon} className="cart-icon" />
             <span className="cart-badge">0</span>
           </div>
