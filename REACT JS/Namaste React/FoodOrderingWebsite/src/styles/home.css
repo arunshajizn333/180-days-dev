@@ -16,7 +16,7 @@
   background-image: url("../assets/hero-background.png");
   background-repeat: no-repeat;
   background-position: right center;
-  background-size: contain;
+  background-size: cover;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
