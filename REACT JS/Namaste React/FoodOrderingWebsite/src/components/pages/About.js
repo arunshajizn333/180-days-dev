@@ -1,5 +1,6 @@
 import React from "react";
 
+
 const About = () => (
   <main className="page-content about-page">
     <section className="page-hero">
@@ -34,6 +35,7 @@ const About = () => (
         </div>
       </div>
     </section>
+
   </main>
 );
 
