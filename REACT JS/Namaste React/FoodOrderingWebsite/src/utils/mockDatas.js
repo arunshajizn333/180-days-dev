@@ -1,5 +1,4 @@
 
-
 const CATEGORIES = [
   { id: "all", name: "All", icon: "⊞", bg: "#fff0e6" },
   { id: "pizza", name: "Pizza", icon: "🍕", bg: "#fff5f0" },
@@ -11,9 +10,6 @@ const CATEGORIES = [
   { id: "beverages", name: "Beverages", icon: "🥤", bg: "#fff7ed" },
   { id: "more", name: "More", icon: "•••", bg: "#f3f4f6" },
 ];
-
-
-
 
 
 module.exports = { CATEGORIES };
