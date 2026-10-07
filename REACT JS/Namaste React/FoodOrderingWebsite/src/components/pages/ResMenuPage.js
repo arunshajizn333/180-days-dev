@@ -1,6 +1,7 @@
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { IMAGE_URL } from "../../utils/constants.js";
+import useResMenuApi from "../../utils/useResMenuApi.js";
 
 // Appetizing food fallbacks if item is missing imageId
 const FOOD_FALLBACKS = [
@@ -311,39 +312,11 @@ const CartPanel = ({ cartItems, allItems, onAdd, onRemove }) => {
 // ═══════════════════════════════════════════════════════════════════
 const ResMenuPage = () => {
   const { resId } = useParams();
-  const [resInfo, setResInfo] = useState(null);
+  const resInfo = useResMenuApi(resId);
   const [activeTab, setActiveTab] = useState("menu");
   const [activeCategory, setActiveCategory] = useState("recommended");
   const [cartItems, setCartItems] = useState({});
   const recommendedRef = useRef(null);
-
-  const fetchMenu = async () => {
-    try {
-      const response = await fetch(`http://localhost:5000/api/menu/${resId}`);
-      if (response.ok) {
-        const json = await response.json();
-        setResInfo(json?.data);
-        return;
-      }
-    } catch (error) {
-      console.log("Local proxy not reachable, using fallback Swiggy menu");
-    }
-
-    try {
-      // Fallback via CORS proxy if local backend not running
-      const fallbackRes = await fetch(
-        `https://proxy.corsfix.com/?https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9352403&lng=77.624532&restaurantId=${resId}`
-      );
-      const json = await fallbackRes.json();
-      setResInfo(json?.data);
-    } catch (e) {
-      console.error("Failed to fetch menu:", e);
-    }
-  };
-
-  useEffect(() => {
-    fetchMenu();
-  }, [resId]);
 
   const handleAddItem = (item) => {
     setCartItems((prev) => ({
