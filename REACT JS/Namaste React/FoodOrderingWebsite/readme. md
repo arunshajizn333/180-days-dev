@@ -14,6 +14,8 @@ The app is inspired by food delivery platforms and showcases restaurant listings
 - Conditional rendering and UI updates
 - Component lifecycle concepts
 - Routing basics and app structure
+- Learned how to create custom hooks for data fetching and state management
+
 
 ## Features
 
