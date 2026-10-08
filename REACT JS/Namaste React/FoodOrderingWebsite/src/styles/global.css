@@ -300,6 +300,26 @@ button {
   border: 2px solid #ffffff;
 }
 
+.online-status {
+  display: flex;
+  align-items: center;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.status-dot.online {
+  background-color: #22c55e;
+}
+
+.status-dot.offline {
+  background-color: #a3a3a3;
+}
+
 /* ===================================================
    FOOTER (TargetDesign.png)
    =================================================== */

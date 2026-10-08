@@ -6,9 +6,11 @@ import locationIcon from "url:../assets/location.png";
 import profileIcon from "url:../assets/profile.png";
 import cartIcon from "url:../assets/cart.png";
 import exitIcon from "url:../assets/exit.png";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const NavBar = () => {
   const location = useLocation();
+  const isOnline=useOnlineStatus()
 
   const LoginObj = {
     btName: "Login / Sign Up",
@@ -31,6 +33,7 @@ const NavBar = () => {
 
         <nav className="nav-links-container" aria-label="Main Navigation">
           <ul className="nav-links">
+           
             <li className={`nav-link ${location.pathname === "/" ? "active" : ""}`}>
               <Link to="/">Home</Link>
             </li>
@@ -74,6 +77,7 @@ const NavBar = () => {
               {btnName.btName}
             </button>
           </div>
+           <span className={`status-dot ${isOnline ? "online" : "offline"}`}></span>
 
           <div className="cart" aria-label="Shopping Cart">
             <img alt="Cart" src={cartIcon} className="cart-icon" />

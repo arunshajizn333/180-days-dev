@@ -42,6 +42,15 @@ async function getPage() {
   return pageInstance;
 }
 
+
+
+app.get("/api/restaurants/:latitude", async (req, res) => {
+
+
+})
+
+
+
 app.get("/api/menu/:restaurantId", async (req, res) => {
   const { restaurantId } = req.params;
   const lat = req.query.lat || "12.9352403";
