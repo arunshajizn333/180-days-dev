@@ -1,4 +1,4 @@
-import React from "react";
+import  { lazy,Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import { useState } from "react";
 
@@ -10,12 +10,14 @@ import PromoBanner from "./components/PromoBanner.js";
 import Footer from "./components/Footer.js";
 
 import { RouterProvider, createBrowserRouter, Outlet } from "react-router-dom";
-import About from "./components/pages/About.js";
+
 import Error from "./components/pages/Error.js";
 import Contact from "./components/pages/Contact.js";
 import ResMenuPage from "./components/pages/ResMenuPage.js";
 import OfflinePage from "./components/pages/OfflinePage.js";
 import useOnlineStatus from "./utils/useOnlineStatus.js";
+
+ const About=lazy(()=>import("./components/pages/About.js"))
 
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -48,6 +50,8 @@ const App = () => {
 
    const isOnline =useOnlineStatus();
 
+  
+
   return (
     <div className="app-container">
       <NavBar />
@@ -68,7 +72,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/about",
-        element: <About />,
+        element: <Suspense fallback={<h1>Loading...</h1>}><About /></Suspense> ,
         errorElement: <Error />
       },
       {
