@@ -14,6 +14,8 @@ import About from "./components/pages/About.js";
 import Error from "./components/pages/Error.js";
 import Contact from "./components/pages/Contact.js";
 import ResMenuPage from "./components/pages/ResMenuPage.js";
+import OfflinePage from "./components/pages/OfflinePage.js";
+import useOnlineStatus from "./utils/useOnlineStatus.js";
 
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -27,6 +29,7 @@ const Home = () => {
       setSearchTerm(catName);
     }
   };
+
 
   return (
     <div className="home-content">
@@ -42,10 +45,13 @@ const Home = () => {
 };
 
 const App = () => {
+
+   const isOnline =useOnlineStatus();
+
   return (
     <div className="app-container">
       <NavBar />
-      <Outlet />
+      {isOnline ? <Outlet /> : <OfflinePage/>}
       <Footer />
     </div>
   );

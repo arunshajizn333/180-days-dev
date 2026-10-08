@@ -1,0 +1,113 @@
+
+/* ===================================================
+   1. Offline PAGE
+   =================================================== */
+
+
+.offline-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  text-align: center;
+}
+
+.offline-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.offline-icon {
+  font-size: 64px;
+}
+
+.offline-content h1 {
+  font-size: 28px;
+  color: #333;
+  margin: 0;
+}
+
+.offline-content p {
+  font-size: 16px;
+  color: #777;
+  margin: 0;
+}
+
+.retry-btn {
+  margin-top: 8px;
+  padding: 10px 28px;
+  background-color: #22c55e;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.retry-btn:hover {
+  background-color: #16a34a;
+}
+
+
+/* ===================================================
+   2. ERROR PAGE
+   =================================================== */
+
+
+
+
+.error-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  text-align: center;
+}
+
+.error-page .page-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  max-width: 480px;
+}
+
+.error-page .page-eyebrow {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #ef4444;
+  margin: 0;
+}
+
+.error-page h1 {
+  font-size: 32px;
+  color: #1f2937;
+  margin: 0;
+}
+
+.error-page p {
+  font-size: 16px;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.error-page .page-button {
+  margin-top: 12px;
+  padding: 12px 32px;
+  background-color: #1f2937;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.error-page .page-button:hover {
+  background-color: #374151;
+}

@@ -20,3 +20,6 @@
 
 /* 6. Contact page */
 @import url("./src/styles/contact.css");
+
+/* 6. other pages */
+@import url("./src/styles/others.css");
