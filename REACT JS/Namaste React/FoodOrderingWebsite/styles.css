@@ -21,5 +21,11 @@
 /* 6. Contact page */
 @import url("./src/styles/contact.css");
 
-/* 6. other pages */
+/* 7. other pages */
 @import url("./src/styles/others.css");
+
+/* 8. TAILWIND CSS */
+@import "tailwindcss";
+
+
+
