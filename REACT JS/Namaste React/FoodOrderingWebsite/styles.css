@@ -15,8 +15,8 @@
 /* 4. Restaurant Menu page */
 @import url("./src/styles/restaurantMenu.css");
 
-/* 5. About page */
-@import url("./src/styles/about.css");
+/* 5. About page (now using Tailwind CSS) */
+/* @import url("./src/styles/about.css"); */
 
 /* 6. Contact page */
 @import url("./src/styles/contact.css");

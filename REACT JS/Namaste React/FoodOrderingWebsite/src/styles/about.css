@@ -2,6 +2,11 @@
    ABOUT PAGE STYLING
    =================================================== */
 
+/* NOTE: These styles have been migrated to Tailwind CSS
+   utility classes directly in About.js.
+   Kept here as reference. Uncomment if you want to revert. */
+
+/*
 .about-page {
   width: min(100% - 48px, 980px);
   margin: 0 auto;
@@ -71,7 +76,6 @@
   letter-spacing: -0.4px;
 }
 
-/* About Stats Row */
 .about-stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -117,3 +121,4 @@
     gap: 12px;
   }
 }
+*/

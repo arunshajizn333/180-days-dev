@@ -22,10 +22,10 @@ class UserCard extends React.Component {
 
         return(
             <div>
-                <h1>{name}</h1>
+                <h1 className="shadow-black">{name}</h1>
                 <p>{location}</p>
               <h4>{this.state.count}</h4>
-                <button onClick={()=>{
+                <button className="rounded-lg" onClick={()=>{
                     this.setState({
                         count : this.state.count+1,
                     }
