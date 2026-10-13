@@ -3,6 +3,10 @@
    Modular CSS Architecture
    =================================================== */
 
+/* Establish CSS layer order — utilities beats base,
+   so Tailwind utilities override the * reset in global.css */
+@layer theme, base, components, utilities;
+
 /* 1. Global design tokens, resets, navbar, footer */
 @import url("./src/styles/global.css");
 
@@ -24,7 +28,6 @@
 /* 7. other pages */
 @import url("./src/styles/others.css");
 
-/* 8. TAILWIND CSS — import theme + utilities only, skip preflight
-   so Tailwind's base reset doesn't override our custom global styles */
-@import "tailwindcss/theme" layer(theme);
-@import "tailwindcss/utilities" layer(utilities);
+/* 8. TAILWIND CSS — must come after @import url() rules
+   (CSS spec: @import must precede all rules except @charset and @layer) */
+@import "tailwindcss";
