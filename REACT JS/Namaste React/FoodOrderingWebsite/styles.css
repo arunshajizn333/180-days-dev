@@ -24,8 +24,7 @@
 /* 7. other pages */
 @import url("./src/styles/others.css");
 
-/* 8. TAILWIND CSS */
-@import "tailwindcss";
-
-
-
+/* 8. TAILWIND CSS — import theme + utilities only, skip preflight
+   so Tailwind's base reset doesn't override our custom global styles */
+@import "tailwindcss/theme" layer(theme);
+@import "tailwindcss/utilities" layer(utilities);
