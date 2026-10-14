@@ -2,6 +2,8 @@ import { useState } from "react";
 import { ShimmerCard } from "./Shimmers.js";
 import { IMAGE_URL } from "../utils/constants.js";
 
+
+
 // High quality fallback images in case Swiggy CDN is blocked or missing imageId
 const FALLBACK_IMAGES = [
   "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600&auto=format&fit=crop&q=80",
@@ -105,7 +107,7 @@ const RestaurantCard = ({ restaurantData, isLoading }) => {
       <div className="res-info">
         <h3 className="res-name" title={name}>{name}</h3>
         <p className="res-cuisines" title={cuisineList}>{cuisineList}</p>
-        
+
         <div className="res-rating-row">
           <span className="star-icon">★</span>
           <span className="rating-score">{rating}</span>
@@ -120,5 +122,19 @@ const RestaurantCard = ({ restaurantData, isLoading }) => {
     </div>
   );
 };
+
+export const ResRatingCard = (RestaurantCard) => {
+  return (props) => {
+    return (
+      <div className="relative">
+        <label className="absolute top-2.5 left-2.5 z-10 flex items-center gap-1 bg-gradient-to-r from-amber-500 to-yellow-400 text-neutral-900 text-xs font-bold px-2.5 py-1 rounded-full shadow-lg pointer-events-none uppercase tracking-wider text-[11px]">
+          <span>⭐</span> Top Rated
+        </label>
+        <RestaurantCard {...props} />
+      </div>
+    );
+  };
+};
+
 
 export default RestaurantCard;
