@@ -16,6 +16,7 @@ import Contact from "./components/pages/Contact.js";
 import ResMenuPage from "./components/pages/ResMenuPage.js";
 import OfflinePage from "./components/pages/OfflinePage.js";
 import useOnlineStatus from "./utils/useOnlineStatus.js";
+import AccordianResPage from "./components/Learn/AccordianResPage.js";
 
  const About=lazy(()=>import("./components/pages/About.js"))
 
@@ -81,7 +82,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/restaurentMenu/:resId",
-        element: <ResMenuPage />,
+        element: <AccordianResPage />,
       },
     ],
     errorElement: <Error />,
