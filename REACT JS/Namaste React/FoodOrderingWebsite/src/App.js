@@ -82,7 +82,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/restaurentMenu/:resId",
-        element: <AccordianResPage />,
+        element: <ResMenuPage/>,
       },
     ],
     errorElement: <Error />,

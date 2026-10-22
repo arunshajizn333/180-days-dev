@@ -106,6 +106,7 @@ const useResDataApi = () => {
         seoParams,
       });
 
+
       if (!nextOffset) {
         setHasMore(false);
       }
