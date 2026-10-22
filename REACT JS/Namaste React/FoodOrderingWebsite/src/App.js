@@ -1,4 +1,4 @@
-import  { lazy,Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import { useState } from "react";
 
@@ -17,8 +17,11 @@ import ResMenuPage from "./components/pages/ResMenuPage.js";
 import OfflinePage from "./components/pages/OfflinePage.js";
 import useOnlineStatus from "./utils/useOnlineStatus.js";
 import AccordianResPage from "./components/Learn/AccordianResPage.js";
+import Profile from "./components/pages/Profile.js";
 
- const About=lazy(()=>import("./components/pages/About.js"))
+import UserContext from "./utils/UserContext.js";
+
+const About = lazy(() => import("./components/pages/About.js"));
 
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -32,7 +35,6 @@ const Home = () => {
       setSearchTerm(catName);
     }
   };
-
 
   return (
     <div className="home-content">
@@ -48,17 +50,19 @@ const Home = () => {
 };
 
 const App = () => {
+  const [userName, setUserName] = useState("Arun");
 
-   const isOnline =useOnlineStatus();
+  const isOnline = useOnlineStatus();
 
-  
 
   return (
-    <div className="app-container">
-      <NavBar />
-      {isOnline ? <Outlet /> : <OfflinePage/>}
-      <Footer />
-    </div>
+    <UserContext.Provider value={{ loggedInUser : userName, setUserName }}>
+      <div className="app-container">
+        <NavBar />
+        {isOnline ? <Outlet /> : <OfflinePage />}
+        <Footer />
+      </div>
+    </UserContext.Provider>
   );
 };
 
@@ -73,8 +77,12 @@ const router = createBrowserRouter([
       },
       {
         path: "/about",
-        element: <Suspense fallback={<h1>Loading...</h1>}><About /></Suspense> ,
-        errorElement: <Error />
+        element: (
+          <Suspense fallback={<h1>Loading...</h1>}>
+            <About />
+          </Suspense>
+        ),
+        errorElement: <Error />,
       },
       {
         path: "/contact",
@@ -82,7 +90,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/restaurentMenu/:resId",
-        element: <ResMenuPage/>,
+        element: <ResMenuPage />,
+      },
+      {
+        path: "/profile/",
+        element: <Profile />,
       },
     ],
     errorElement: <Error />,
