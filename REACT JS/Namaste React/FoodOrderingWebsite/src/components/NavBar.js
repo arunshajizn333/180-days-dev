@@ -13,7 +13,7 @@ const NavBar = () => {
   const { loggedInUser } = useContext(UserContext);
 
   // Get the first letter of the username for the avatar
-  const avatarInitial = loggedInUser ? loggedInUser.charAt(0).toUpperCase() : "?";
+  const avatarInitial = loggedInUser ? loggedInUser.charAt(0).toUpperCase() : "?";       
 
   return (
     <header className="navbar-wrapper">
