@@ -28,6 +28,9 @@
 /* 7. other pages */
 @import url("./src/styles/others.css");
 
-/* 8. TAILWIND CSS — must come after @import url() rules
+/* 8. Cart page */
+@import url("./src/styles/cart.css");
+
+/* 9. TAILWIND CSS — must come after @import url() rules
    (CSS spec: @import must precede all rules except @charset and @layer) */
 @import "tailwindcss";

@@ -1,7 +1,9 @@
 import { useState, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { IMAGE_URL } from "../../utils/constants.js";
 import useResMenuApi from "../../utils/useResMenuApi.js";
+import { useDispatch } from "react-redux";
+import { addItems } from "../../utils/Redux/cartSlice.js";
 
 // Appetizing food fallbacks if item is missing imageId
 const FOOD_FALLBACKS = [
@@ -298,10 +300,11 @@ const CartPanel = ({ cartItems, allItems, onAdd, onRemove }) => {
           <span className="cart-panel-subtotal-label">Subtotal</span>
           <span className="cart-panel-subtotal-value">₹{subtotal}</span>
         </div>
-
-        <button className="cart-panel-checkout-btn">
-          View Cart →
-        </button>
+        <Link to="/cart">
+          <button className="cart-panel-checkout-btn">
+            View Cart →
+          </button>
+        </Link>
       </div>
     </div>
   );
@@ -318,11 +321,17 @@ const ResMenuPage = () => {
   const [cartItems, setCartItems] = useState({});
   const recommendedRef = useRef(null);
 
+  const dispatch = useDispatch()
+
   const handleAddItem = (item) => {
     setCartItems((prev) => ({
       ...prev,
       [item.id]: (prev[item.id] || 0) + 1,
     }));
+    // console.log(item);
+    
+  dispatch(addItems(item))
+
   };
 
   const handleRemoveItem = (itemId) => {
