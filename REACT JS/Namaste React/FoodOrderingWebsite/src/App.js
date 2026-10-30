@@ -18,8 +18,11 @@ import OfflinePage from "./components/pages/OfflinePage.js";
 import useOnlineStatus from "./utils/useOnlineStatus.js";
 import AccordianResPage from "./components/Learn/AccordianResPage.js";
 import Profile from "./components/pages/Profile.js";
+import { Provider } from "react-redux";
 
 import UserContext from "./utils/UserContext.js";
+import appStore from "./utils/appStore.js";
+import Cart from "./components/pages/Cart.js";
 
 const About = lazy(() => import("./components/pages/About.js"));
 
@@ -56,6 +59,7 @@ const App = () => {
 
 
   return (
+    <Provider store={appStore} >
     <UserContext.Provider value={{ loggedInUser : userName, setUserName }}>
       <div className="app-container">
         <NavBar />
@@ -63,6 +67,7 @@ const App = () => {
         <Footer />
       </div>
     </UserContext.Provider>
+    </Provider>
   );
 };
 
@@ -95,6 +100,10 @@ const router = createBrowserRouter([
       {
         path: "/profile/",
         element: <Profile />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
     ],
     errorElement: <Error />,

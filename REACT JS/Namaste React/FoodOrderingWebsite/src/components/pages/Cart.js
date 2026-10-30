@@ -99,7 +99,7 @@ const Cart = () => {
           <span className="breadcrumb-sep">/</span>
           <span className="breadcrumb-current">Cart</span>
         </div>
-        <h1 className="cart-page-title">Your Cart</h1>
+        
 
         <div className="cart-empty">
           <div className="cart-empty-icon">🛒</div>

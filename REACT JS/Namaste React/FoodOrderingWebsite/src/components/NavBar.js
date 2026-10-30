@@ -6,14 +6,19 @@ import locationIcon from "url:../assets/location.png";
 import cartIcon from "url:../assets/cart.png";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
+import { useSelector } from "react-redux";
 
 const NavBar = () => {
   const location = useLocation();
   const isOnline = useOnlineStatus();
   const { loggedInUser } = useContext(UserContext);
 
+   const cartLength=useSelector((store)=>store.cart.items.length)
+
   // Get the first letter of the username for the avatar
-  const avatarInitial = loggedInUser ? loggedInUser.charAt(0).toUpperCase() : "?";       
+  const avatarInitial = loggedInUser
+    ? loggedInUser.charAt(0).toUpperCase()
+    : "?";
 
   return (
     <header className="navbar-wrapper">
@@ -81,7 +86,8 @@ const NavBar = () => {
             aria-label="Go to profile"
           >
             {/* Avatar circle with initial */}
-            <div className={`
+            <div
+              className={`
               relative flex items-center justify-center
               w-8 h-8 rounded-full
               bg-gradient-to-br from-[#ff5200] to-[#ff7b3a]
@@ -89,14 +95,17 @@ const NavBar = () => {
               shadow-[0_2px_8px_rgba(255,82,0,0.25)]
               group-hover:shadow-[0_3px_12px_rgba(255,82,0,0.35)]
               transition-shadow duration-200
-            `}>
+            `}
+            >
               {avatarInitial}
               {/* Tiny online dot on avatar */}
-              <span className={`
+              <span
+                className={`
                 absolute -bottom-0.5 -right-0.5
                 w-3 h-3 rounded-full border-2 border-white
                 ${isOnline ? "bg-emerald-400" : "bg-neutral-400"}
-              `}></span>
+              `}
+              ></span>
             </div>
 
             {/* Username + label */}
@@ -104,11 +113,13 @@ const NavBar = () => {
               <span className="text-[10px] font-medium text-[#9ca3af] tracking-wide uppercase">
                 Account
               </span>
-              <span className={`
+              <span
+                className={`
                 text-[13px] font-bold tracking-[-0.01em] max-w-[120px] truncate
                 ${location.pathname === "/profile" ? "text-[#ff5200]" : "text-[#1a1a1a]"}
                 group-hover:text-[#ff5200] transition-colors duration-200
-              `}>
+              `}
+              >
                 {loggedInUser}
               </span>
             </div>
@@ -120,16 +131,24 @@ const NavBar = () => {
                 group-hover:text-[#ff5200] group-hover:translate-x-0.5
                 transition-all duration-200 hidden sm:block
               `}
-              fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth="2.5"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M9 5l7 7-7 7"
+              />
             </svg>
           </Link>
-
-          <div className="cart" aria-label="Shopping Cart">
-            <img alt="Cart" src={cartIcon} className="cart-icon" />
-            <span className="cart-badge">0</span>
-          </div>
+          <Link to="/cart">
+            <div className="cart" aria-label="Shopping Cart">
+              <img alt="Cart" src={cartIcon} className="cart-icon" />
+              <span className="cart-badge">{cartLength}</span>
+            </div>
+          </Link>
         </div>
       </div>
     </header>
