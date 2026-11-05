@@ -13,7 +13,7 @@ const NavBar = () => {
   const isOnline = useOnlineStatus();
   const { loggedInUser } = useContext(UserContext);
 
-   const cartLength=useSelector((store)=>store.cart.items.length)
+   const cartLength=useSelector((store)=>store.cart.items.length) || 0;
 
   // Get the first letter of the username for the avatar
   const avatarInitial = loggedInUser
@@ -118,7 +118,7 @@ const NavBar = () => {
                 text-[13px] font-bold tracking-[-0.01em] max-w-[120px] truncate
                 ${location.pathname === "/profile" ? "text-[#ff5200]" : "text-[#1a1a1a]"}
                 group-hover:text-[#ff5200] transition-colors duration-200
-              `}
+              `} data-testid="logged-in-user"
               >
                 {loggedInUser}
               </span>
@@ -146,7 +146,7 @@ const NavBar = () => {
           <Link to="/cart">
             <div className="cart" aria-label="Shopping Cart">
               <img alt="Cart" src={cartIcon} className="cart-icon" />
-              <span className="cart-badge">{cartLength}</span>
+              <span data-testid="cart-length" className="cart-badge">{cartLength}</span>
             </div>
           </Link>
         </div>

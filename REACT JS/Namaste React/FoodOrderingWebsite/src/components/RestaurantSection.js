@@ -94,6 +94,7 @@ const RestaurantSection = ({ searchTerm = "" }) => {
               key={res.info.id}
               className="res-card-link"
             >
+              {console.log(res)}
               {res.info.avgRating >= 4.4? (
                 <ResTopRatedCard restaurantData={res} />
               ) : (

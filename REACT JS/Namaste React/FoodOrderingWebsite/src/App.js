@@ -16,7 +16,6 @@ import Contact from "./components/pages/Contact.js";
 import ResMenuPage from "./components/pages/ResMenuPage.js";
 import OfflinePage from "./components/pages/OfflinePage.js";
 import useOnlineStatus from "./utils/useOnlineStatus.js";
-import AccordianResPage from "./components/Learn/AccordianResPage.js";
 import Profile from "./components/pages/Profile.js";
 import { Provider } from "react-redux";
 
