@@ -1,4 +1,4 @@
-import { sum } from "../Learn/sum"
+import { sum } from "../../Learn/sum"
 
 test("Sum of two nums",()=>{
     const result= sum(5,1)

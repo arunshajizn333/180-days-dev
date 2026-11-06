@@ -1,9 +1,9 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
-import NavBar from "../NavBar";
+import NavBar from "../../NavBar";
 import { Provider } from "react-redux";
-import appStore from "../../utils/appStore";
-import UserContext from "../../utils/UserContext";
+import appStore from "../../../utils/appStore";
+import UserContext from "../../../utils/UserContext";
 import { BrowserRouter } from "react-router-dom";
 
 describe("NavBar Testing", () => {

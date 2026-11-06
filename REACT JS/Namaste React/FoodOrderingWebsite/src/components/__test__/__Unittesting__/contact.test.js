@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
-import Contact from "../pages/Contact";
+import Contact from "../../pages/Contact";
 
 describe("Contact Page Testing", () => {
     it("Should load Contact us heading", () => {

@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
-import RestaurantCard, { ResRatingCard } from "../RestaurantCard";
-import { MOCK_DATA } from "../../mocks/cardMockdata";
+import RestaurantCard, { ResRatingCard } from "../../RestaurantCard";
+import { MOCK_DATA } from "../../../mocks/cardMockdata";
 
 
 describe("RestaurantCard Page Testing", () => {

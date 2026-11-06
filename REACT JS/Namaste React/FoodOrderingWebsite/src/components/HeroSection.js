@@ -14,7 +14,7 @@ const HeroSection = ({ setSearchTerm }) => {
     setInputValue(term);
     setSearchTerm(term);
   };
-  
+
 
   return (
     <div className="hero-section">
@@ -33,6 +33,7 @@ const HeroSection = ({ setSearchTerm }) => {
           </svg>
         </span>
         <input
+          data-testid="hero-search"
           type="text"
           placeholder="Search for dishes, restaurants or cuisines..."
           className="search-input"
