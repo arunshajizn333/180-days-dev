@@ -14,6 +14,7 @@ const HeroSection = ({ setSearchTerm }) => {
     setInputValue(term);
     setSearchTerm(term);
   };
+  
 
   return (
     <div className="hero-section">
