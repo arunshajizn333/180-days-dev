@@ -11,9 +11,25 @@ app.use(express.json());
 let browserInstance = null;
 let pageInstance = null;
 
+// Force-reset the cached page so the next getPage() creates a fresh one
+async function resetPage() {
+  if (pageInstance) {
+    try {
+      await pageInstance.close();
+    } catch (_) {
+      // already dead — ignore
+    }
+    pageInstance = null;
+  }
+}
+
 // Reusable browser with stealth settings
 async function getPage() {
-  if (!browserInstance) {
+  if (!browserInstance || !browserInstance.connected) {
+    // If the browser itself died, clean up fully
+    if (browserInstance) {
+      try { await browserInstance.close(); } catch (_) { }
+    }
     browserInstance = await puppeteer.launch({
       headless: "new",
       args: [
@@ -44,39 +60,55 @@ async function getPage() {
 }
 
 // Helper function to execute requests directly inside the authenticated Swiggy browser session
-async function fetchFromSwiggy(targetUrl, options = {}) {
+// Retries once with a fresh page on detached-frame or similar errors
+async function fetchFromSwiggy(targetUrl, options = {}, retries = 1) {
   const page = await getPage();
 
-  const data = await page.evaluate(
-    async ({ url, opts }) => {
-      const fetchOptions = {
-        method: opts.method || "GET",
-        headers: {
-          __fetch_req__: "true",
-          Accept: "*/*",
-          ...(opts.headers || {}),
-        },
-      };
+  try {
+    const data = await page.evaluate(
+      async ({ url, opts }) => {
+        const fetchOptions = {
+          method: opts.method || "GET",
+          headers: {
+            __fetch_req__: "true",
+            Accept: "*/*",
+            ...(opts.headers || {}),
+          },
+        };
 
-      if (opts.body) {
-        fetchOptions.body =
-          typeof opts.body === "string" ? opts.body : JSON.stringify(opts.body);
-        fetchOptions.headers["Content-Type"] = "application/json";
-      }
+        if (opts.body) {
+          fetchOptions.body =
+            typeof opts.body === "string" ? opts.body : JSON.stringify(opts.body);
+          fetchOptions.headers["Content-Type"] = "application/json";
+        }
 
-      const resp = await fetch(url, fetchOptions);
-      const text = await resp.text();
+        const resp = await fetch(url, fetchOptions);
+        const text = await resp.text();
 
-      try {
-        return JSON.parse(text);
-      } catch (e) {
-        return { error: "Non-JSON response", status: resp.status, raw: text.slice(0, 300) };
-      }
-    },
-    { url: targetUrl, opts: options }
-  );
+        try {
+          return JSON.parse(text);
+        } catch (e) {
+          return { error: "Non-JSON response", status: resp.status, raw: text.slice(0, 300) };
+        }
+      },
+      { url: targetUrl, opts: options }
+    );
 
-  return data;
+    return data;
+  } catch (error) {
+    const isDetached =
+      error.message?.includes("detached") ||
+      error.message?.includes("Execution context was destroyed") ||
+      error.message?.includes("Session closed");
+
+    if (isDetached && retries > 0) {
+      console.warn("Page frame detached — resetting session and retrying...");
+      await resetPage();
+      return fetchFromSwiggy(targetUrl, options, retries - 1);
+    }
+
+    throw error; // not recoverable, let the route handler catch it
+  }
 }
 
 // 1. Initial restaurant list (GET)
