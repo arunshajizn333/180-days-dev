@@ -5,7 +5,7 @@
         "target": "ES2024",
         "jsx": "react-jsx",
         "allowImportingTsExtensions": true,
-        "checkJs": undefined,
+        "checkJs": false,
         "experimentalDecorators": false,
         "strictNullChecks": true,
         "strictFunctionTypes": true,

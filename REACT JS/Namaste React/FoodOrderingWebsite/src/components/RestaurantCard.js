@@ -68,7 +68,7 @@ const RestaurantCard = ({ restaurantData, isLoading }) => {
   };
 
   return (
-    <div className="res-card">
+    <div className="res-card" data-testid="restaurant-card">
       <div className="res-img-container">
         <img
           src={imageSrc}
@@ -105,7 +105,7 @@ const RestaurantCard = ({ restaurantData, isLoading }) => {
       </div>
 
       <div className="res-info">
-        <h3 className="res-name" title={name}>{name}</h3>
+        <h3 className="res-name" data-testid="resName" title={name}>{name}</h3>
         <p className="res-cuisines" title={cuisineList}>{cuisineList}</p>
 
         <div className="res-rating-row">

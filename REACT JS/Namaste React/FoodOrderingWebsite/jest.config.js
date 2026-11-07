@@ -90,6 +90,8 @@ const config = {
   //   "node"
   // ],
 
+   setupFilesAfterEnv: ["<rootDir>/src/setupTests.js"],
+
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
  moduleNameMapper: {
   "^url:.*$": "<rootDir>/src/mocks/fileMock.js",
